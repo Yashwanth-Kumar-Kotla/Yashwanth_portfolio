@@ -1,6 +1,7 @@
 
 import { ArrowRight, Download, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 const Hero = () => {
   const scrollToSection = (sectionId: string) => {
@@ -37,6 +38,20 @@ const Hero = () => {
 
       <div className="container mx-auto px-6 text-center text-white relative z-10">
         <div className="animate-fade-in">
+          {/* Profile Picture */}
+          <div className="mb-8 flex justify-center">
+            <Avatar className="w-32 h-32 md:w-40 md:h-40 border-4 border-white/20 shadow-2xl">
+              <AvatarImage 
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop&crop=face" 
+                alt="Yashwanth Kumar Kotla"
+                className="object-cover"
+              />
+              <AvatarFallback className="bg-gradient-to-br from-blue-600 to-teal-600 text-white text-2xl md:text-3xl font-bold">
+                YK
+              </AvatarFallback>
+            </Avatar>
+          </div>
+
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-teal-200 bg-clip-text text-transparent">
             Yashwanth Kumar Kotla
           </h1>

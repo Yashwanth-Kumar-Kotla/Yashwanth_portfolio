@@ -39,30 +39,30 @@ const Navigation = () => {
     }`}>
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Enhanced Logo */}
+          {/* Enhanced YK Logo with Cool Animations */}
           <div 
-            className="cursor-pointer group"
+            className="cursor-pointer group relative"
             onClick={() => scrollToSection('hero')}
           >
-            <div className={`relative inline-flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-300 group-hover:scale-110 ${
+            <div className={`relative inline-flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-12 ${
               isScrolled 
                 ? 'bg-gradient-to-br from-blue-600 to-teal-600 shadow-lg' 
                 : 'bg-white/10 backdrop-blur-sm border border-white/20'
             }`}>
-              <span className={`text-xl font-bold transition-colors ${
+              <span className={`text-xl font-bold transition-all duration-300 group-hover:scale-125 ${
                 isScrolled ? 'text-white' : 'text-white'
               }`}>
                 YK
               </span>
-              {/* Subtle glow effect */}
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-400 to-teal-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-            </div>
-            {/* Optional brand text */}
-            <div className={`ml-3 hidden sm:inline-block transition-colors ${
-              isScrolled ? 'text-gray-800' : 'text-white'
-            }`}>
-              <span className="text-sm font-medium">Yashwanth Kumar</span>
-              <div className="text-xs text-blue-600">Data Analyst</div>
+              
+              {/* Rotating border on hover */}
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-400 via-purple-500 to-teal-400 opacity-0 group-hover:opacity-100 group-hover:animate-spin transition-all duration-500 -z-10 blur-sm"></div>
+              
+              {/* Pulsing glow effect */}
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-400 to-teal-400 opacity-0 group-hover:opacity-30 group-hover:animate-pulse transition-all duration-300 blur-md -z-10"></div>
+              
+              {/* Expanding ring effect */}
+              <div className="absolute inset-0 rounded-xl border-2 border-blue-400 opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-700 ease-out"></div>
             </div>
           </div>
 

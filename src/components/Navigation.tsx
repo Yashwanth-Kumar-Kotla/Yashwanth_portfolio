@@ -34,7 +34,7 @@ const Navigation = () => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled 
-        ? 'bg-white/95 backdrop-blur-md shadow-lg' 
+        ? 'bg-background/80 backdrop-blur-xl border-b border-border/50' 
         : 'bg-transparent'
     }`}>
       <div className="container mx-auto px-6">
@@ -44,25 +44,19 @@ const Navigation = () => {
             className="cursor-pointer group relative"
             onClick={() => scrollToSection('hero')}
           >
-            <div className={`relative inline-flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-12 ${
-              isScrolled 
-                ? 'bg-gradient-to-br from-blue-600 to-teal-600 shadow-lg' 
-                : 'bg-white/10 backdrop-blur-sm border border-white/20'
-            }`}>
-              <span className={`text-xl font-bold transition-all duration-300 group-hover:scale-125 ${
-                isScrolled ? 'text-white' : 'text-white'
-              }`}>
+            <div className="relative inline-flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-12 bg-gradient-to-br from-primary to-emerald-600 shadow-lg group-hover:shadow-primary/25">
+              <span className="text-xl font-bold transition-all duration-300 group-hover:scale-125 text-background">
                 YK
               </span>
               
               {/* Rotating border on hover */}
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-400 via-purple-500 to-teal-400 opacity-0 group-hover:opacity-100 group-hover:animate-spin transition-all duration-500 -z-10 blur-sm"></div>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary via-emerald-500 to-teal-400 opacity-0 group-hover:opacity-100 group-hover:animate-spin transition-all duration-500 -z-10 blur-sm"></div>
               
               {/* Pulsing glow effect */}
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-400 to-teal-400 opacity-0 group-hover:opacity-30 group-hover:animate-pulse transition-all duration-300 blur-md -z-10"></div>
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary to-emerald-400 opacity-0 group-hover:opacity-30 group-hover:animate-pulse transition-all duration-300 blur-md -z-10"></div>
               
               {/* Expanding ring effect */}
-              <div className="absolute inset-0 rounded-xl border-2 border-blue-400 opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-700 ease-out"></div>
+              <div className="absolute inset-0 rounded-xl border-2 border-primary opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-700 ease-out"></div>
             </div>
           </div>
 
@@ -72,16 +66,15 @@ const Navigation = () => {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`text-sm font-medium transition-colors hover:text-blue-600 ${
-                  isScrolled ? 'text-gray-700' : 'text-white'
-                }`}
+                className="text-sm font-medium transition-all duration-200 hover:text-primary relative group"
               >
                 {item.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-200 group-hover:w-full"></span>
               </button>
             ))}
             <Button 
               onClick={() => scrollToSection('contact')}
-              className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white"
+              className="bg-primary hover:bg-primary/90 text-background font-semibold transition-all duration-200 hover:scale-105"
             >
               Hire Me
             </Button>
@@ -93,7 +86,7 @@ const Navigation = () => {
               variant="ghost"
               size="sm"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={isScrolled ? 'text-gray-800' : 'text-white'}
+              className="text-foreground hover:text-primary"
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
@@ -102,20 +95,20 @@ const Navigation = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 bg-white/95 backdrop-blur-md rounded-lg mt-2 shadow-lg">
+          <div className="md:hidden py-4 bg-card/95 backdrop-blur-md rounded-lg mt-2 shadow-lg border border-border/50">
             <div className="flex flex-col space-y-4 px-4">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-left text-gray-700 hover:text-blue-600 transition-colors py-2"
+                  className="text-left text-foreground hover:text-primary transition-colors py-2 font-medium"
                 >
                   {item.label}
                 </button>
               ))}
               <Button 
                 onClick={() => scrollToSection('contact')}
-                className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white mt-4"
+                className="bg-primary hover:bg-primary/90 text-background font-semibold mt-4"
               >
                 Hire Me
               </Button>

@@ -39,16 +39,31 @@ const Navigation = () => {
     }`}>
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
+          {/* Enhanced Logo */}
           <div 
-            className="cursor-pointer"
+            className="cursor-pointer group"
             onClick={() => scrollToSection('hero')}
           >
-            <h1 className={`text-2xl font-bold transition-colors ${
+            <div className={`relative inline-flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-300 group-hover:scale-110 ${
+              isScrolled 
+                ? 'bg-gradient-to-br from-blue-600 to-teal-600 shadow-lg' 
+                : 'bg-white/10 backdrop-blur-sm border border-white/20'
+            }`}>
+              <span className={`text-xl font-bold transition-colors ${
+                isScrolled ? 'text-white' : 'text-white'
+              }`}>
+                YK
+              </span>
+              {/* Subtle glow effect */}
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-400 to-teal-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+            </div>
+            {/* Optional brand text */}
+            <div className={`ml-3 hidden sm:inline-block transition-colors ${
               isScrolled ? 'text-gray-800' : 'text-white'
             }`}>
-              YK<span className="text-blue-600">.</span>
-            </h1>
+              <span className="text-sm font-medium">Yashwanth Kumar</span>
+              <div className="text-xs text-blue-600">Data Analyst</div>
+            </div>
           </div>
 
           {/* Desktop Navigation */}

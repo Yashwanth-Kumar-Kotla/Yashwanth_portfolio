@@ -1,25 +1,55 @@
 
-import { Code, Database, BarChart3, Brain, Users, Target } from "lucide-react";
-import { Progress } from "@/components/ui/progress";
+import { Code, Database, BarChart3, Brain, Users, Target, Star } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 const Skills = () => {
   const technicalSkills = [
-    { name: "Python", level: 90, tools: "Pandas, NumPy, Matplotlib, Seaborn, Plotly" },
-    { name: "SQL", level: 85, tools: "Data querying, joins, aggregations" },
-    { name: "Data Visualization", level: 88, tools: "Matplotlib, Seaborn, Plotly, Excel" },
-    { name: "Data Analysis", level: 82, tools: "Statistical analysis, trend identification" },
-    { name: "Excel", level: 80, tools: "Advanced formulas, pivot tables, charts" },
-    { name: "APIs & Tools", level: 75, tools: "Jupyter, Google Colab, GitHub, Hugging Face" },
+    { 
+      name: "Python", 
+      level: "Advanced", 
+      tools: ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Plotly"],
+      stars: 5
+    },
+    { 
+      name: "SQL", 
+      level: "Advanced", 
+      tools: ["Data querying", "Joins", "Aggregations"],
+      stars: 4
+    },
+    { 
+      name: "Data Visualization", 
+      level: "Advanced", 
+      tools: ["Matplotlib", "Seaborn", "Plotly", "Excel"],
+      stars: 5
+    },
+    { 
+      name: "Data Analysis", 
+      level: "Intermediate", 
+      tools: ["Statistical analysis", "Trend identification"],
+      stars: 4
+    },
+    { 
+      name: "Excel", 
+      level: "Intermediate", 
+      tools: ["Advanced formulas", "Pivot tables", "Charts"],
+      stars: 4
+    },
+    { 
+      name: "APIs & Tools", 
+      level: "Intermediate", 
+      tools: ["Jupyter", "Google Colab", "GitHub", "Hugging Face"],
+      stars: 3
+    },
   ];
 
   const softSkills = [
-    { name: "Problem Solving", level: 92 },
-    { name: "Analytical Thinking", level: 88 },
-    { name: "Communication", level: 85 },
-    { name: "Attention to Detail", level: 90 },
-    { name: "Data Storytelling", level: 83 },
-    { name: "Critical Thinking", level: 87 },
+    { name: "Problem Solving", level: "Expert" },
+    { name: "Analytical Thinking", level: "Advanced" },
+    { name: "Communication", level: "Advanced" },
+    { name: "Attention to Detail", level: "Expert" },
+    { name: "Data Storytelling", level: "Advanced" },
+    { name: "Critical Thinking", level: "Advanced" },
   ];
 
   const expertiseAreas = [
@@ -44,6 +74,36 @@ const Skills = () => {
       description: "Converting data into actionable business recommendations"
     }
   ];
+
+  const renderStars = (count: number) => {
+    return (
+      <div className="flex gap-1">
+        {[...Array(5)].map((_, index) => (
+          <Star
+            key={index}
+            className={`h-4 w-4 ${
+              index < count 
+                ? "fill-yellow-400 text-yellow-400" 
+                : "text-gray-300"
+            }`}
+          />
+        ))}
+      </div>
+    );
+  };
+
+  const getLevelColor = (level: string) => {
+    switch (level) {
+      case "Expert":
+        return "bg-green-100 text-green-800 border-green-200";
+      case "Advanced":
+        return "bg-blue-100 text-blue-800 border-blue-200";
+      case "Intermediate":
+        return "bg-orange-100 text-orange-800 border-orange-200";
+      default:
+        return "bg-gray-100 text-gray-800 border-gray-200";
+    }
+  };
 
   return (
     <section id="skills" className="py-20 bg-white">
@@ -82,13 +142,25 @@ const Skills = () => {
             </CardHeader>
             <CardContent className="space-y-6">
               {technicalSkills.map((skill, index) => (
-                <div key={index} className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <h4 className="font-semibold text-gray-800">{skill.name}</h4>
-                    <span className="text-sm text-gray-600">{skill.level}%</span>
+                <div key={index} className="space-y-3">
+                  <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h4 className="font-semibold text-gray-800">{skill.name}</h4>
+                        <Badge className={getLevelColor(skill.level)}>
+                          {skill.level}
+                        </Badge>
+                      </div>
+                      {renderStars(skill.stars)}
+                    </div>
                   </div>
-                  <Progress value={skill.level} className="h-2" />
-                  <p className="text-xs text-gray-500">{skill.tools}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {skill.tools.map((tool, toolIndex) => (
+                      <Badge key={toolIndex} variant="outline" className="text-xs">
+                        {tool}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
               ))}
             </CardContent>
@@ -104,12 +176,11 @@ const Skills = () => {
             </CardHeader>
             <CardContent className="space-y-6">
               {softSkills.map((skill, index) => (
-                <div key={index} className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <h4 className="font-semibold text-gray-800">{skill.name}</h4>
-                    <span className="text-sm text-gray-600">{skill.level}%</span>
-                  </div>
-                  <Progress value={skill.level} className="h-2" />
+                <div key={index} className="flex justify-between items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                  <h4 className="font-semibold text-gray-800">{skill.name}</h4>
+                  <Badge className={getLevelColor(skill.level)}>
+                    {skill.level}
+                  </Badge>
                 </div>
               ))}
             </CardContent>

@@ -40,7 +40,7 @@ const Hero = () => {
             </Avatar>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-teal-200 bg-clip-text text-transparent">YASHWANTH KUMAR KOTLA</h1>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-teal-200 bg-clip-text text-transparent">Yashwanth Kumar Kotla</h1>
           <h2 className="text-2xl md:text-3xl mb-6 text-blue-200 font-light">
             Aspiring Data Analyst | Python, SQL, Data Visualization
           </h2>

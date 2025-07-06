@@ -1,11 +1,12 @@
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Mail, MapPin, Phone, Send, Github, Linkedin, MessageSquare } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +16,7 @@ const Contact = () => {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -25,25 +27,71 @@ const Contact = () => {
     }));
   };
 
+  const validateForm = () => {
+    const { name, email, subject, message } = formData;
+    if (!name.trim() || !email.trim() || !subject.trim() || !message.trim()) {
+      toast({
+        title: "Please fill out all fields.",
+        description: "All form fields are required to send your message.",
+        variant: "destructive",
+      });
+      return false;
+    }
+    
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast({
+        title: "Invalid email address.",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return false;
+    }
+    
+    return true;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+    
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Message Sent Successfully!",
-      description: "Thank you for reaching out. I'll get back to you within 24 hours.",
-    });
-    
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: ""
-    });
-    setIsSubmitting(false);
+    try {
+      if (formRef.current) {
+        await emailjs.sendForm(
+          'service_oytre3a',     // Service ID
+          'template_vdxa30o',    // Template ID
+          formRef.current,       // The form element reference
+          'BeDdJGGyyHzh4gEG5'    // Public Key (User ID)
+        );
+        
+        toast({
+          title: "Message sent successfully!",
+          description: "Thank you for reaching out. I'll get back to you within 24 hours.",
+        });
+        
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: ""
+        });
+      }
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      toast({
+        title: "Failed to send message.",
+        description: "Please try again later or contact me directly via email.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -63,7 +111,7 @@ const Contact = () => {
       icon: Linkedin,
       title: "LinkedIn",
       value: "Connect with me",
-      link: "https://github.com/Yashwanth-Kumar-Kotla/"
+      link: "https://www.linkedin.com/in/yashwanthkumarkotla"
     }
   ];
 
@@ -96,7 +144,7 @@ const Contact = () => {
                   href={info.link}
                   target={info.link.startsWith('mailto:') ? '_self' : '_blank'}
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow group"
+                  className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow group cursor-hover"
                 >
                   <div className="flex-shrink-0">
                     <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-teal-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -133,7 +181,7 @@ const Contact = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-sm font-medium text-gray-700">
@@ -147,7 +195,7 @@ const Contact = () => {
                         value={formData.name}
                         onChange={handleInputChange}
                         placeholder="Your full name"
-                        className="w-full"
+                        className="w-full cursor-hover"
                       />
                     </div>
                     <div className="space-y-2">
@@ -162,7 +210,7 @@ const Contact = () => {
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder="your.email@example.com"
-                        className="w-full"
+                        className="w-full cursor-hover"
                       />
                     </div>
                   </div>
@@ -179,7 +227,7 @@ const Contact = () => {
                       value={formData.subject}
                       onChange={handleInputChange}
                       placeholder="What's this about?"
-                      className="w-full"
+                      className="w-full cursor-hover"
                     />
                   </div>
                   
@@ -195,14 +243,14 @@ const Contact = () => {
                       onChange={handleInputChange}
                       placeholder="Tell me about your project, timeline, and any specific requirements..."
                       rows={6}
-                      className="w-full resize-none"
+                      className="w-full resize-none cursor-hover"
                     />
                   </div>
                   
                   <Button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white py-3 text-lg"
+                    className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white py-3 text-lg cursor-hover"
                   >
                     {isSubmitting ? (
                       <>

@@ -13,14 +13,14 @@ const CustomCursor = () => {
 
     const updateTrailPosition = () => {
       setTrailPosition(prev => ({
-        x: prev.x + (mousePosition.x - prev.x) * 0.1,
-        y: prev.y + (mousePosition.y - prev.y) * 0.1,
+        x: prev.x + (mousePosition.x - prev.x) * 0.08,
+        y: prev.y + (mousePosition.y - prev.y) * 0.08,
       }));
     };
 
     const handleMouseEnter = (e: Event) => {
       const target = e.target as HTMLElement;
-      if (target.matches('button, a, [role="button"], .cursor-hover')) {
+      if (target.matches('button, a, [role="button"], .cursor-hover, input, textarea, select')) {
         setIsHovering(true);
         document.body.classList.add('cursor-hover');
       }
@@ -28,7 +28,7 @@ const CustomCursor = () => {
 
     const handleMouseLeave = (e: Event) => {
       const target = e.target as HTMLElement;
-      if (target.matches('button, a, [role="button"], .cursor-hover')) {
+      if (target.matches('button, a, [role="button"], .cursor-hover, input, textarea, select')) {
         setIsHovering(false);
         document.body.classList.remove('cursor-hover');
       }
@@ -50,13 +50,16 @@ const CustomCursor = () => {
 
   return (
     <>
+      {/* Main Cursor - Stylized Pointer */}
       <div
         id="custom-cursor"
         style={{
           left: `${mousePosition.x}px`,
           top: `${mousePosition.y}px`,
         }}
+        className={isHovering ? 'cursor-active' : ''}
       />
+      {/* Cursor Trail */}
       <div
         id="cursor-trail"
         style={{

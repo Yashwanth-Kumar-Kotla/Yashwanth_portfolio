@@ -1,4 +1,3 @@
-
 import { ArrowRight, Download, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
@@ -44,7 +43,7 @@ const Hero = () => {
           <div className="mb-8 flex justify-center">
             <Avatar className="w-32 h-32 md:w-40 md:h-40 border-4 border-white/20 shadow-2xl">
               <AvatarImage 
-                src="https://postimg.cc/rKdMv4kJ" 
+                src="/lovable-uploads/bff2161f-7ca7-46b0-b34b-0fe852119fb7.png" 
                 alt="Yashwanth Kumar Kotla Profile Picture" 
                 className="object-cover" 
               />

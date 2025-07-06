@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { ExternalLink, Github, BarChart3, TrendingUp, Users, Calendar } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -24,7 +23,7 @@ const Projects = () => {
       ],
       image: "photo-1461749280684-dccba630e2f6",
       github: "https://github.com/Yashwanth-Kumar-Kotla/",
-      demo: "#"
+      demo: "https://github.com/Yashwanth-Kumar-Kotla/"
     },
     {
       id: 2,
@@ -42,7 +41,7 @@ const Projects = () => {
       ],
       image: "photo-1518770660439-4636190af475",
       github: "https://github.com/Yashwanth-Kumar-Kotla/",
-      demo: "#"
+      demo: "https://github.com/Yashwanth-Kumar-Kotla/"
     }
   ];
 
@@ -155,7 +154,7 @@ const Projects = () => {
                           <Button asChild variant="outline">
                             <a href={project.demo} target="_blank" rel="noopener noreferrer">
                               <ExternalLink className="mr-2 h-4 w-4" />
-                              Live Demo
+                              GitHub Profile
                             </a>
                           </Button>
                         </div>

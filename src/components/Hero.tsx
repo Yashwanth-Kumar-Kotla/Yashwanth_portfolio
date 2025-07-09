@@ -108,18 +108,6 @@ const Hero = () => {
                 View Resume
               </Button>
             </a>
-
-            {/* Download Resume */}
-            <a href="/resume.pdf" download>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-white px-8 py-3 text-lg"
-              >
-                <Download className="mr-2 h-5 w-5" />
-                Download Resume
-              </Button>
-            </a>
           </div>
         </div>
       </div>
@@ -135,3 +123,4 @@ const Hero = () => {
 };
 
 export default Hero;
+

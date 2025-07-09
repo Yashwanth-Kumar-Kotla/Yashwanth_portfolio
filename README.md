@@ -1,73 +1,84 @@
-# Welcome to your Lovable project
+🎨 Yashwanth Portfolio
+Overview
+A sleek, responsive developer portfolio built with TypeScript, React, Tailwind CSS & Vite — showcasing projects, skills and contact info.
 
-## Project info
+🔧 Features
+Modern stack: Vite + React + TypeScript + Tailwind CSS
 
-**URL**: https://lovable.dev/projects/964ed268-b9a0-4bfd-b416-361cd8bf0d4e
+Component-based UI with shadcn‑ui for sleek and reusable design
 
-## How can I edit this code?
+Responsive design: profiles well on desktop, tablet, and mobile
 
-There are several ways of editing your application.
+Easy editing: powered by Lovable.dev, real-time deployment
 
-**Use Lovable**
+🛠 Tech Stack
+Framework: React & Vite
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/964ed268-b9a0-4bfd-b416-361cd8bf0d4e) and start prompting.
+Language: TypeScript
 
-Changes made via Lovable will be committed automatically to this repo.
+Styling: Tailwind CSS + shadcn‑ui
 
-**Use your preferred IDE**
+Deployment: Lovable.dev (supports Codespaces, GitHub Actions)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+🚀 Quick Start
+Clone & Install:
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+bash
+Copy
+Edit
+git clone https://github.com/Yashwanth-Kumar-Kotla/Yashwanth_portfolio.git
+cd Yashwanth_portfolio
+npm install
+Run locally:
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+bash
+Copy
+Edit
 npm run dev
-```
+Deploy via Lovable.dev or standard Vercel/Netlify workflow.
 
-**Edit a file directly in GitHub**
+🧩 How to Edit
+Use Lovable.dev’s live editor
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Or within your IDE:
 
-**Use GitHub Codespaces**
+Update project sections in src/components/…
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Customize personal data (name, bio, social links)
 
-## What technologies are used for this project?
+🎯 How to Deploy
+In Lovable.dev:
 
-This project is built with:
+Visit your project, click Share → Publish
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Or add and connect a custom domain in Settings → Domains
 
-## How can I deploy this project?
+📚 Folder Structure
+pgsql
+Copy
+Edit
+/
+├─ public/         Static assets
+├─ src/
+│   ├─ components/ UI components (Hero, Projects, Contact)
+│   ├─ styles/     Tailwind configuration
+│   └─ main.tsx    Entry point
+├─ index.html
+├─ tailwind.config.ts
+├─ tsconfig.json
+├─ vite.config.ts
+└─ package.json
+📞 Contact
+GitHub: @Yashwanth‑Kumar‑Kotla
 
-Simply open [Lovable](https://lovable.dev/projects/964ed268-b9a0-4bfd-b416-361cd8bf0d4e) and click on Share -> Publish.
+LinkedIn / Email: Your Email or LinkedIn handle
 
-## Can I connect a custom domain to my Lovable project?
+📝 To‑Do / Improvements
+⚙️ Add a blog or writing section
 
-Yes, you can!
+🧪 Include animations or theme switching
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+🔗 Integrate analytics (e.g. Google Analytics)
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+⭐️ Contributions & Feedback
+Let me know if you spot issues or have ideas! Feel free to open an issue, suggest improvements, or submit a pull request. Thank you for visiting!

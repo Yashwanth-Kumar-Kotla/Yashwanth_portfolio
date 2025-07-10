@@ -1,0 +1,17 @@
+email 159125892+gpt-engineer-app[bot]@users.noreply.github.com
+replace email kotla.yashwanthkumar@gmail.com
+
+name gpt-engineer-app[bot]
+replace name Yashwanth Kumar Kotla
+
+email lovable-dev[bot]@users.noreply.github.com
+replace email kotla.yashwanthkumar@gmail.com
+
+name lovable-dev[bot]
+replace name Yashwanth Kumar Kotla
+
+email 20891a1228yashwanth@gmail.com
+replace email kotla.yashwanthkumar@gmail.com
+
+name yashwanth28
+replace name Yashwanth Kumar Kotla

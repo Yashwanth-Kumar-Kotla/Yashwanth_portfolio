@@ -1,5 +1,4 @@
-
-import { Code, Database, BarChart3, Brain, Users, Target, Star } from "lucide-react";
+import { Code, Database, Brain, Cpu, Sparkles, Users, Star, BarChart3 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -8,37 +7,37 @@ const Skills = () => {
     { 
       name: "Python", 
       level: "Advanced", 
-      tools: ["Pandas", "NumPy", "Matplotlib", "Seaborn", "Plotly"],
+      tools: ["NumPy", "Pandas", "Matplotlib", "Seaborn", "Plotly"],
       stars: 5
     },
     { 
-      name: "SQL", 
+      name: "Machine Learning", 
       level: "Advanced", 
-      tools: ["Data querying", "Joins", "Aggregations"],
+      tools: ["Scikit-learn", "XGBoost", "LightGBM", "Feature Engineering"],
+      stars: 5
+    },
+    { 
+      name: "Deep Learning", 
+      level: "Intermediate", 
+      tools: ["TensorFlow", "PyTorch", "Neural Networks", "CNNs"],
+      stars: 4
+    },
+    { 
+      name: "SQL & Databases", 
+      level: "Advanced", 
+      tools: ["PostgreSQL", "MySQL", "Data Modeling", "Query Optimization"],
       stars: 4
     },
     { 
       name: "Data Visualization", 
       level: "Advanced", 
-      tools: ["Matplotlib", "Seaborn", "Plotly", "Excel"],
+      tools: ["Plotly", "Seaborn", "Matplotlib", "Streamlit"],
       stars: 5
     },
     { 
-      name: "Data Analysis", 
+      name: "MLOps & Deployment", 
       level: "Intermediate", 
-      tools: ["Statistical analysis", "Trend identification"],
-      stars: 4
-    },
-    { 
-      name: "Excel", 
-      level: "Intermediate", 
-      tools: ["Advanced formulas", "Pivot tables", "Charts"],
-      stars: 4
-    },
-    { 
-      name: "APIs & Tools", 
-      level: "Intermediate", 
-      tools: ["Jupyter", "Google Colab", "GitHub", "Hugging Face"],
+      tools: ["Git", "Docker", "Vercel", "Hugging Face", "APIs"],
       stars: 3
     },
   ];
@@ -46,32 +45,32 @@ const Skills = () => {
   const softSkills = [
     { name: "Problem Solving", level: "Expert" },
     { name: "Analytical Thinking", level: "Advanced" },
+    { name: "Research & Learning", level: "Expert" },
     { name: "Communication", level: "Advanced" },
-    { name: "Attention to Detail", level: "Expert" },
-    { name: "Data Storytelling", level: "Advanced" },
+    { name: "Team Collaboration", level: "Advanced" },
     { name: "Critical Thinking", level: "Advanced" },
   ];
 
   const expertiseAreas = [
     {
-      icon: BarChart3,
-      title: "Sales Analysis",
-      description: "Seasonal trend identification and performance optimization"
-    },
-    {
-      icon: Target,
-      title: "Market Insights",
-      description: "Job market analysis and salary pattern exploration"
-    },
-    {
-      icon: Database,
-      title: "Data Processing",
-      description: "Large dataset cleaning and preparation"
-    },
-    {
       icon: Brain,
-      title: "Strategic Insights",
-      description: "Converting data into actionable business recommendations"
+      title: "Machine Learning",
+      description: "Classification, Regression, Ensemble methods, Model tuning"
+    },
+    {
+      icon: Sparkles,
+      title: "AI & LLMs",
+      description: "Multi-agent systems, GPT integration, Prompt engineering"
+    },
+    {
+      icon: BarChart3,
+      title: "Data Science",
+      description: "Statistical analysis, EDA, Feature engineering, Insights"
+    },
+    {
+      icon: Cpu,
+      title: "Model Deployment",
+      description: "End-to-end ML pipelines, APIs, Production systems"
     }
   ];
 
@@ -112,7 +111,7 @@ const Skills = () => {
           <h2 className="text-4xl font-bold text-gray-800 mb-4">Skills & Expertise</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-teal-600 mx-auto mb-6"></div>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            A comprehensive toolkit for transforming data into insights
+            A comprehensive toolkit for building intelligent ML systems
           </p>
         </div>
 

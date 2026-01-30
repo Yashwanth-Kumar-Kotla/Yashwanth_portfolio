@@ -19,10 +19,10 @@ const Hero = () => {
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500 rounded-full filter blur-3xl animate-pulse"></div>
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-teal-500 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-3/4 left-1/2 w-32 h-32 bg-blue-300 rounded-full filter blur-2xl animate-pulse delay-500"></div>
+        <div className="absolute top-3/4 left-1/2 w-32 h-32 bg-purple-400 rounded-full filter blur-2xl animate-pulse delay-500"></div>
       </div>
 
-      {/* Floating data elements */}
+      {/* Floating ML/AI elements */}
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(12)].map((_, i) => (
           <div
@@ -37,15 +37,19 @@ const Hero = () => {
           >
             {
               [
-                "SELECT *",
-                "JOIN",
-                "WHERE",
-                "GROUP BY",
-                "pandas",
-                "numpy",
-                "plt.show()",
-                "df.head()",
-              ][i % 8]
+                "model.fit()",
+                "TensorFlow",
+                "PyTorch",
+                "Scikit-learn",
+                "XGBoost",
+                "neural_net",
+                "predict()",
+                "accuracy: 0.96",
+                "loss: 0.04",
+                "epochs=100",
+                "batch_size",
+                "GPT-4",
+              ][i % 12]
             }
           </div>
         ))}
@@ -71,10 +75,11 @@ const Hero = () => {
             Yashwanth Kumar Kotla
           </h1>
           <h2 className="text-2xl md:text-3xl mb-6 text-blue-200 font-light">
-            Aspiring Data Analyst | Python, SQL, Data Visualization
+            Data Scientist | Machine Learning Engineer
           </h2>
           <p className="text-xl mb-8 text-gray-300 max-w-2xl mx-auto">
-            Turning complex data into actionable insights through analysis and storytelling.
+            Building intelligent systems with Machine Learning and AI. 
+            Transforming data into predictive models and actionable insights.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center flex-wrap">
@@ -123,4 +128,3 @@ const Hero = () => {
 };
 
 export default Hero;
-

@@ -1,5 +1,5 @@
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { Mail, MapPin, Phone, Send, Github, Linkedin, MessageSquare } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,6 @@ const Contact = () => {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const formRef = useRef<HTMLFormElement>(null);
   const { toast } = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -62,12 +61,20 @@ const Contact = () => {
     setIsSubmitting(true);
     
     try {
-      if (formRef.current) {
-        await emailjs.sendForm(
-          'service_oytre3a',     // Service ID
-          'template_vdxa30o',    // Template ID
-          formRef.current,       // The form element reference
-          'BeDdJGGyyHzh4gEG5'    // Public Key (User ID)
+      {
+        await emailjs.send(
+          'service_oytre3a',
+          'template_vdxa30o',
+          {
+            from_name: formData.name,
+            name: formData.name,
+            from_email: formData.email,
+            email: formData.email,
+            reply_to: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+          },
+          'BeDdJGGyyHzh4gEG5'
         );
         
         toast({
@@ -133,7 +140,7 @@ const Contact = () => {
               <h3 className="text-2xl font-bold text-gray-800 mb-6">Let's Connect</h3>
               <p className="text-gray-600 mb-8">
                 Whether you have a project in mind, need consultation, or just want to say hello, 
-                I'm always excited to discuss data analytics opportunities.
+                I'm always excited to discuss data science opportunities.
               </p>
             </div>
 
@@ -181,7 +188,7 @@ const Contact = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-sm font-medium text-gray-700">

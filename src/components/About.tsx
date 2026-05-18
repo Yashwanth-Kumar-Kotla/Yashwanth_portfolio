@@ -15,21 +15,13 @@ const About = () => {
           <div className="space-y-6">
             <div className="prose prose-lg text-gray-700">
               <p className="text-xl leading-relaxed">
-                Hello! I'm <span className="font-semibold text-blue-600">Yashwanth Kumar Kotla</span>,
-                an aspiring Data Scientist with a passion for building intelligent systems and predictive models
-                that transform raw data into strategic decisions with measurable business impact.
+                Hi, I'm <span className="font-semibold text-blue-600">Yashwanth Kumar Kotla</span>, an aspiring Data Scientist who loves turning messy data into models that actually make a difference.
               </p>
               <p>
-                With a strong academic foundation in data science and hands-on experience across the full
-                ML lifecycle — from feature engineering and model selection to deployment and interpretation —
-                I specialize in delivering solutions that are both technically rigorous and business-relevant.
+                I work across the ML lifecycle: cleaning data, engineering features, building models, and communicating results clearly. I enjoy finding the story in the numbers as much as the technical side.
               </p>
               <p>
-                I thrive at the intersection of statistics, machine learning, and domain expertise. Whether
-                it's building classification models, designing NLP pipelines, or uncovering trends through
-                deep exploratory analysis, I bring curiosity and precision to every problem. I'm committed
-                to continuous learning in this fast-moving field and driven by the belief that great data
-                science doesn't just answer questions — it asks better ones.
+                I'm always learning, whether it's a new algorithm, a better way to visualize data, or a sharper way to frame a problem. Every dataset is a new puzzle worth solving.
               </p>
             </div>
           </div>

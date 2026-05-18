@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ExternalLink, Github, Brain, Heart, Home, CloudRain, Sparkles, Anchor } from "lucide-react";
+import { ExternalLink, Github, Brain, Heart, BarChart3, Layers, Sparkles, ShoppingCart } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -11,15 +11,15 @@ const Projects = () => {
       id: 1,
       title: "Aura Dual Intelligence",
       shortDescription: "Multi-agent AI system combining GPT-4 and Gemini for enhanced reasoning and accuracy",
-      fullDescription: "Built a sophisticated dual-intelligence collaboration engine where GPT-4 and Gemini work together to critique, evaluate, and synthesize answers. The system leverages the strengths of both models to achieve higher accuracy and deeper reasoning through multi-agent collaboration. Features real-time model interaction and a modern Next.js frontend.",
+      fullDescription: "Built a dual-intelligence collaboration engine where GPT-4 and Gemini work together through a four-stage pipeline: independent responses, cross-evaluation, critique, and unified synthesis. The result is higher accuracy and deeper reasoning than either model alone. Features a production-deployed Next.js frontend with real-time model interaction.",
       tools: ["Next.js", "GPT-4 API", "Gemini API", "Tailwind CSS", "Multi-Agent AI"],
       category: "AI / LLM",
       icon: Sparkles,
       highlights: [
-        "Dual LLM architecture for cross-validation of responses",
-        "Real-time collaborative reasoning between AI models",
-        "Production-deployed application with live demo",
-        "Modern responsive UI with Next.js and Tailwind"
+        "Four-stage pipeline: query → dual responses → cross-critique → unified answer",
+        "Two LLMs reviewing each other's work for higher accuracy",
+        "Production-deployed with live demo at auraduo.app",
+        "Modern responsive UI built with Next.js and Tailwind"
       ],
       image: "photo-1677442136019-21780ecad995",
       github: "https://github.com/Yashwanth-Kumar-Kotla/aura-dual-intelligence",
@@ -27,93 +27,93 @@ const Projects = () => {
     },
     {
       id: 2,
-      title: "Breast Cancer Detection using ML",
-      shortDescription: "Machine learning model for early breast cancer detection with high accuracy classification",
-      fullDescription: "Developed a machine learning classification system to detect breast cancer from diagnostic features. Implemented multiple ML algorithms including Logistic Regression, Random Forest, and SVM, comparing their performance to select the optimal model. Focused on achieving high recall to minimize false negatives in medical diagnosis.",
-      tools: ["Python", "Scikit-learn", "Pandas", "NumPy", "Classification"],
+      title: "Next-Word Prediction with LSTM",
+      shortDescription: "Deep learning NLP model that predicts the next word in a sentence, trained on two corpora including Sherlock Holmes",
+      fullDescription: "Built a PyTorch LSTM language model trained on two distinct corpora: a custom 40-sentence dataset and the full Sherlock Holmes novel. The architecture uses an embedding layer (vocab → 100 dims) → LSTM (100 → 150 hidden units) → linear output layer. Supports autoregressive inference for multi-word text generation. Deployed as a live Streamlit web app.",
+      tools: ["Python", "PyTorch", "LSTM", "NLP", "Streamlit"],
+      category: "Deep Learning / NLP",
+      icon: Brain,
+      highlights: [
+        "96.36% accuracy on custom corpus, 86% on Sherlock Holmes novel",
+        "Autoregressive inference for multi-word text generation",
+        "Dual corpus training to test generalization across domains",
+        "Live demo deployed on Streamlit Cloud"
+      ],
+      image: "photo-1526374965328-7f61d4dc18c5",
+      github: "https://github.com/Yashwanth-Kumar-Kotla/Next-Word-Prediction-Using-LSTM",
+      demo: "https://nextt-word-predictor.streamlit.app"
+    },
+    {
+      id: 3,
+      title: "Fashion-MNIST Image Classifier (ANN)",
+      shortDescription: "PyTorch neural network for clothing classification with batch normalization, dropout, and GPU acceleration",
+      fullDescription: "Built a multi-layer perceptron (784→128→64→10) in PyTorch to classify 10 clothing categories from the Fashion-MNIST dataset. Implements batch normalization, dropout regularization (p=0.3), ReLU activations, and Adam/SGD optimization. Includes custom Dataset and DataLoader classes, CUDA GPU support, and demonstrates modern deep learning best practices end-to-end.",
+      tools: ["Python", "PyTorch", "ANN", "GPU / CUDA", "Batch Normalization"],
+      category: "Deep Learning",
+      icon: Layers,
+      highlights: [
+        "MLP architecture with batch normalization and dropout regularization",
+        "GPU acceleration via CUDA for faster training",
+        "Custom Dataset and DataLoader classes for clean data pipelines",
+        "Demonstrates overfitting prevention with modern regularization"
+      ],
+      image: "photo-1558769132-cb1aea458c5e",
+      github: "https://github.com/Yashwanth-Kumar-Kotla/Fashion-MNIST-using-ANN",
+      demo: "https://github.com/Yashwanth-Kumar-Kotla/Fashion-MNIST-using-ANN"
+    },
+    {
+      id: 4,
+      title: "Walmart Sales EDA",
+      shortDescription: "End-to-end business intelligence analysis on 10k Walmart transactions using Python and SQL",
+      fullDescription: "Comprehensive data analysis of a 10,000-row Walmart sales dataset. Built a full data pipeline using Kaggle API for ingestion, Python (Pandas, NumPy) for transformation, and both MySQL and PostgreSQL for structured querying. Solved real business intelligence questions around revenue trends, top-performing categories, peak hours, and customer behavior patterns.",
+      tools: ["Python", "Pandas", "MySQL", "PostgreSQL", "Kaggle API"],
+      category: "Business Analytics",
+      icon: ShoppingCart,
+      highlights: [
+        "Full pipeline from Kaggle API ingestion to SQL analysis",
+        "Dual-database querying with MySQL and PostgreSQL",
+        "Revenue trends, category performance, and customer segmentation",
+        "Structured problem-solving approach to business intelligence questions"
+      ],
+      image: "photo-1460925895917-afdab827c52f",
+      github: "https://github.com/Yashwanth-Kumar-Kotla/Walmart_Exploratory_Data_Analysis",
+      demo: "https://github.com/Yashwanth-Kumar-Kotla/Walmart_Exploratory_Data_Analysis"
+    },
+    {
+      id: 5,
+      title: "Diabetes Risk Predictor",
+      shortDescription: "Interactive SVM-based web app for real-time diabetes risk assessment from clinical health metrics",
+      fullDescription: "End-to-end ML project using a Support Vector Machine trained on 8 clinical health parameters (glucose, BMI, blood pressure, insulin, age, etc.) to predict diabetes risk. Deployed as an interactive Streamlit web application with real-time predictions. Covers the full pipeline from preprocessing and feature scaling to model evaluation and live deployment.",
+      tools: ["Python", "Scikit-learn", "SVM", "Streamlit", "Pandas"],
       category: "Healthcare ML",
       icon: Heart,
       highlights: [
-        "Binary classification for malignant/benign tumor detection",
-        "Compared multiple ML algorithms for best performance",
-        "Feature importance analysis for medical insights",
-        "High recall optimization for medical safety"
+        "SVM classifier on 8 key clinical biomarkers",
+        "Real-time prediction via live Streamlit web app",
+        "End-to-end pipeline: preprocessing → training → deployment",
+        "Interpretable results designed for healthcare decision support"
+      ],
+      image: "photo-1576091160550-2173dba999ef",
+      github: "https://github.com/Yashwanth-Kumar-Kotla/Streamlit-ML-using-Diabetes-Prediction-Model",
+      demo: "https://diabetespredictionusing.streamlit.app"
+    },
+    {
+      id: 6,
+      title: "Breast Cancer Detection using ML",
+      shortDescription: "Multi-algorithm classifier for early breast cancer detection, optimized for high recall",
+      fullDescription: "Built a classification system to detect malignant vs benign tumors from diagnostic features. Compared Logistic Regression, Random Forest, and SVM, selecting the best model based on recall — the critical metric in medical diagnosis where false negatives carry the highest cost. Includes feature importance analysis for clinical interpretability.",
+      tools: ["Python", "Scikit-learn", "Random Forest", "SVM", "NumPy"],
+      category: "Healthcare ML",
+      icon: BarChart3,
+      highlights: [
+        "Recall-optimized model selection for medical safety",
+        "Head-to-head comparison of Logistic Regression, Random Forest, and SVM",
+        "Feature importance analysis for clinical interpretability",
+        "Demonstrates understanding of evaluation metrics beyond accuracy"
       ],
       image: "photo-1559757175-5700dde675bc",
       github: "https://github.com/Yashwanth-Kumar-Kotla/Breast-cancer-detection-using-ML",
       demo: "https://github.com/Yashwanth-Kumar-Kotla/Breast-cancer-detection-using-ML"
-    },
-    {
-      id: 3,
-      title: "Diabetes Prediction System",
-      shortDescription: "ML-powered prediction system to identify diabetes risk from patient health metrics",
-      fullDescription: "Built a predictive model using supervised machine learning to identify patients at risk of diabetes based on health indicators like glucose levels, BMI, blood pressure, and other diagnostic measurements. Implemented data preprocessing, feature scaling, and model evaluation with cross-validation.",
-      tools: ["Python", "Scikit-learn", "Pandas", "SVM", "Logistic Regression"],
-      category: "Healthcare ML",
-      icon: Brain,
-      highlights: [
-        "Predictive modeling for diabetes risk assessment",
-        "Data preprocessing and feature engineering pipeline",
-        "Model evaluation with cross-validation techniques",
-        "Interpretable results for healthcare decisions"
-      ],
-      image: "photo-1576091160550-2173dba999ef",
-      github: "https://github.com/Yashwanth-Kumar-Kotla/Diabetes-Prediction-using-Machine-Learning-with-Python",
-      demo: "https://github.com/Yashwanth-Kumar-Kotla/Diabetes-Prediction-using-Machine-Learning-with-Python"
-    },
-    {
-      id: 4,
-      title: "California Housing Price Prediction",
-      shortDescription: "Regression model to predict housing prices based on location and property features",
-      fullDescription: "Developed a comprehensive regression model to predict California housing prices using features like location, median income, house age, and proximity to ocean. Implemented feature engineering, handled missing values, and compared multiple regression algorithms including Linear Regression, Random Forest, and Gradient Boosting.",
-      tools: ["Python", "Scikit-learn", "XGBoost", "Pandas", "Regression"],
-      category: "Regression ML",
-      icon: Home,
-      highlights: [
-        "Multi-feature regression with geographical data",
-        "Ensemble methods for improved predictions",
-        "Feature engineering and data preprocessing",
-        "Model comparison and hyperparameter tuning"
-      ],
-      image: "photo-1560518883-ce09059eeffa",
-      github: "https://github.com/Yashwanth-Kumar-Kotla/California-Housing-Dataset",
-      demo: "https://github.com/Yashwanth-Kumar-Kotla/California-Housing-Dataset"
-    },
-    {
-      id: 5,
-      title: "Rainfall Prediction Challenge",
-      shortDescription: "Classification model to predict rainfall occurrence using meteorological data",
-      fullDescription: "Built a classification model to predict whether it will rain based on various meteorological features including temperature, humidity, wind speed, and atmospheric pressure. Implemented advanced feature engineering, handled imbalanced classes, and optimized for prediction accuracy.",
-      tools: ["Python", "XGBoost", "LightGBM", "Feature Engineering", "Classification"],
-      category: "Classification ML",
-      icon: CloudRain,
-      highlights: [
-        "Weather prediction using ML classification",
-        "Handling imbalanced dataset techniques",
-        "Advanced feature engineering from raw data",
-        "Ensemble methods for robust predictions"
-      ],
-      image: "photo-1534088568595-a066f410bcda",
-      github: "https://github.com/Yashwanth-Kumar-Kotla/rainfall-prediction-challenge-classification",
-      demo: "https://github.com/Yashwanth-Kumar-Kotla/rainfall-prediction-challenge-classification"
-    },
-    {
-      id: 6,
-      title: "Rock vs Mine Sonar Prediction",
-      shortDescription: "Binary classifier using sonar signals to distinguish between rocks and underwater mines",
-      fullDescription: "Implemented a supervised machine learning model to classify sonar signals as either rocks or mines. This classic ML problem involves analyzing 60 sonar frequency features to make accurate predictions. Applied logistic regression with careful data preprocessing and model evaluation.",
-      tools: ["Python", "Scikit-learn", "Logistic Regression", "NumPy", "Binary Classification"],
-      category: "Classification ML",
-      icon: Anchor,
-      highlights: [
-        "Binary classification on sonar signal data",
-        "60-feature analysis for pattern recognition",
-        "Logistic Regression implementation",
-        "Comprehensive model evaluation metrics"
-      ],
-      image: "photo-1551244072-5d12893278ab",
-      github: "https://github.com/Yashwanth-Kumar-Kotla/Rock-or-Mine-Predictor-using-supervised-ML",
-      demo: "https://github.com/Yashwanth-Kumar-Kotla/Rock-or-Mine-Predictor-using-supervised-ML"
     }
   ];
 

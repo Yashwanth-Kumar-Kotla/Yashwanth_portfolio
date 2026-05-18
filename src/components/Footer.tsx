@@ -17,8 +17,8 @@ const Footer = () => {
               Yashwanth Kumar Kotla<span className="text-blue-400">.</span>
             </h3>
             <p className="text-gray-400 mb-6 max-w-md">
-              Aspiring Data Analyst passionate about transforming complex data into actionable insights 
-              that drive strategic decision-making and business growth.
+              Aspiring Data Scientist passionate about building intelligent models and engineering
+              data-driven solutions that create measurable business impact.
             </p>
             <div className="flex space-x-4">
               <a
@@ -70,12 +70,12 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Services</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
-              <li>Data Analysis</li>
-              <li>Data Visualization</li>
-              <li>Market Research</li>
-              <li>Sales Analytics</li>
+              <li>Machine Learning</li>
+              <li>Predictive Analytics</li>
+              <li>NLP & Text Analytics</li>
               <li>Statistical Modeling</li>
-              <li>Dashboard Creation</li>
+              <li>Feature Engineering</li>
+              <li>AI-Powered Insights</li>
             </ul>
           </div>
         </div>

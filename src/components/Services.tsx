@@ -1,45 +1,45 @@
 
-import { Database, BarChart3, FileText, TrendingUp, Users, Lightbulb } from "lucide-react";
+import { Database, BarChart3, Brain, TrendingUp, Users, Lightbulb } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 const Services = () => {
   const services = [
     {
-      icon: Database,
-      title: "Data Cleaning & Preparation",
-      description: "Transform messy datasets into clean, analysis-ready formats with proper validation and quality checks.",
-      features: ["Data validation and quality assessment", "Missing value handling", "Outlier detection and treatment", "Data type optimization"]
-    },
-    {
-      icon: BarChart3,
-      title: "Exploratory Data Analysis (EDA)",
-      description: "Uncover hidden patterns, relationships, and insights through comprehensive statistical analysis.",
-      features: ["Statistical summaries and distributions", "Correlation analysis", "Pattern identification", "Data profiling reports"]
+      icon: Brain,
+      title: "Machine Learning Model Development",
+      description: "Design, train, and validate production-ready ML models tailored to your business problem.",
+      features: ["Classification & regression modeling", "Hyperparameter tuning & cross-validation", "Model interpretability (SHAP, LIME)", "End-to-end pipeline design"]
     },
     {
       icon: TrendingUp,
-      title: "Visualization & Dashboard Creation",
-      description: "Create compelling visual stories from your data with interactive charts and dashboards.",
-      features: ["Interactive visualizations", "Custom dashboard development", "Automated reporting", "Mobile-responsive designs"]
+      title: "Predictive Analytics & Forecasting",
+      description: "Anticipate future trends and outcomes with statistically robust forecasting models.",
+      features: ["Time-series analysis (ARIMA, Prophet, LSTM)", "Demand & revenue forecasting", "Churn prediction & retention modeling", "Scenario simulation & uncertainty quantification"]
     },
     {
-      icon: FileText,
-      title: "Job/Sales/Market Trend Reporting",
-      description: "Comprehensive analysis of market trends, sales performance, and employment patterns.",
-      features: ["Trend analysis and forecasting", "Market research insights", "Performance benchmarking", "Competitive analysis"]
+      icon: Database,
+      title: "Data Engineering & Feature Engineering",
+      description: "Build solid data foundations and craft high-signal features that supercharge model performance.",
+      features: ["ETL pipeline design & automation", "Feature selection & dimensionality reduction", "Data wrangling at scale with pandas & SQL", "Reproducible ML workflows"]
+    },
+    {
+      icon: BarChart3,
+      title: "Statistical Analysis & Hypothesis Testing",
+      description: "Apply rigorous statistical methods to validate assumptions and extract trustworthy insights.",
+      features: ["A/B testing & experiment design", "Regression & multivariate analysis", "Distribution fitting & Bayesian inference", "Causal inference & confounding control"]
     },
     {
       icon: Lightbulb,
-      title: "Actionable Recommendations",
-      description: "Convert data insights into strategic recommendations that drive business growth.",
-      features: ["Strategic insights development", "Decision support analysis", "ROI optimization strategies", "Risk assessment reports"]
+      title: "NLP & Text Analytics",
+      description: "Unlock value from unstructured text data using modern natural language processing techniques.",
+      features: ["Sentiment analysis & opinion mining", "Topic modeling (LDA, BERTopic)", "Named entity recognition & text classification", "Transformer-based model fine-tuning"]
     },
     {
       icon: Users,
-      title: "Data Storytelling & Communication",
-      description: "Make complex data accessible to stakeholders through clear communication and storytelling.",
-      features: ["Executive presentation preparation", "Non-technical audience translation", "Data-driven narratives", "Stakeholder workshops"]
+      title: "AI-Powered Insights & Reporting",
+      description: "Translate complex model outputs into clear, executive-ready narratives that drive decisions.",
+      features: ["Interactive dashboards & automated reports", "Data storytelling for non-technical stakeholders", "ROI measurement & KPI tracking", "Strategic recommendations grounded in evidence"]
     }
   ];
 
@@ -55,7 +55,7 @@ const Services = () => {
           <h2 className="text-4xl font-bold text-gray-800 mb-4">Services</h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-teal-600 mx-auto mb-6"></div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Comprehensive data analysis services to help you make informed decisions and drive business growth
+            End-to-end data science services — from raw data to deployed models — that give you a measurable competitive edge
           </p>
         </div>
 
@@ -91,7 +91,7 @@ const Services = () => {
             Open for Freelance Projects & Collaborations
           </h3>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Ready to transform your data into actionable insights? Let's work together to unlock the potential hidden in your data.
+            Ready to build something intelligent with your data? Let's collaborate to engineer solutions that predict, classify, and deliver real business value.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 

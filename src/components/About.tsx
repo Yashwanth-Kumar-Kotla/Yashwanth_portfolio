@@ -15,19 +15,21 @@ const About = () => {
           <div className="space-y-6">
             <div className="prose prose-lg text-gray-700">
               <p className="text-xl leading-relaxed">
-                Hello! I'm <span className="font-semibold text-blue-600">Yashwanth Kumar Kotla</span>, 
-                an aspiring Data Analyst with a passion for transforming raw data into meaningful insights 
-                that drive strategic decision-making.
+                Hello! I'm <span className="font-semibold text-blue-600">Yashwanth Kumar Kotla</span>,
+                an aspiring Data Scientist with a passion for building intelligent systems and predictive models
+                that transform raw data into strategic decisions with measurable business impact.
               </p>
               <p>
-                With a strong academic foundation and hands-on experience in data analysis, 
-                I specialize in uncovering patterns, trends, and opportunities hidden within complex datasets. 
-                My approach combines technical expertise with storytelling to make data accessible and actionable.
+                With a strong academic foundation in data science and hands-on experience across the full
+                ML lifecycle — from feature engineering and model selection to deployment and interpretation —
+                I specialize in delivering solutions that are both technically rigorous and business-relevant.
               </p>
               <p>
-                I believe in continuous learning and staying updated with the latest tools and methodologies 
-                in the ever-evolving field of data science. Every project is an opportunity to solve real-world 
-                problems through analytical thinking and innovative solutions.
+                I thrive at the intersection of statistics, machine learning, and domain expertise. Whether
+                it's building classification models, designing NLP pipelines, or uncovering trends through
+                deep exploratory analysis, I bring curiosity and precision to every problem. I'm committed
+                to continuous learning in this fast-moving field and driven by the belief that great data
+                science doesn't just answer questions — it asks better ones.
               </p>
             </div>
           </div>
@@ -42,7 +44,7 @@ const About = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="border-l-2 border-gray-200 pl-4">
-                  <h4 className="font-semibold text-gray-800">Master of Science in Data Analytics</h4>
+                  <h4 className="font-semibold text-gray-800">Master of Science in Data Science</h4>
                   <p className="text-gray-600">Webster University</p>
                   <p className="text-sm text-gray-500">Expected March 2026 | CGPA: 3.8/4.0</p>
                 </div>
@@ -65,19 +67,19 @@ const About = () => {
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-teal-600 rounded-full mr-3"></div>
-                    Sales trend analysis and forecasting
+                    Machine learning model development & deployment
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-teal-600 rounded-full mr-3"></div>
-                    Job market insights and analytics
+                    Predictive analytics & forecasting
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-teal-600 rounded-full mr-3"></div>
-                    Interactive data visualizations
+                    Natural language processing & text analytics
                   </li>
                   <li className="flex items-center">
                     <div className="w-2 h-2 bg-teal-600 rounded-full mr-3"></div>
-                    Data storytelling and communication
+                    Feature engineering & statistical modeling
                   </li>
                 </ul>
               </CardContent>

@@ -21,7 +21,7 @@ const Projects = () => {
         "Production-deployed with live demo at auraduo.app",
         "Modern responsive UI built with Next.js and Tailwind"
       ],
-      image: "photo-1677442136019-21780ecad995",
+      image: "photo-FHgWFzDDAOs",
       github: "https://github.com/Yashwanth-Kumar-Kotla/aura-dual-intelligence",
       demo: "https://www.auraduo.app/"
     },
@@ -39,7 +39,7 @@ const Projects = () => {
         "Dual corpus training to test generalization across domains",
         "Live demo deployed on Streamlit Cloud"
       ],
-      image: "photo-1526374965328-7f61d4dc18c5",
+      image: "photo-SKcTKYNRvHY",
       github: "https://github.com/Yashwanth-Kumar-Kotla/Next-Word-Prediction-Using-LSTM",
       demo: "https://nextt-word-predictor.streamlit.app"
     },
@@ -57,7 +57,7 @@ const Projects = () => {
         "Custom Dataset and DataLoader classes for clean data pipelines",
         "Demonstrates overfitting prevention with modern regularization"
       ],
-      image: "photo-1558769132-cb1aea458c5e",
+      image: "photo-ycVFts5Ma4s",
       github: "https://github.com/Yashwanth-Kumar-Kotla/Fashion-MNIST-using-ANN",
       demo: "https://github.com/Yashwanth-Kumar-Kotla/Fashion-MNIST-using-ANN"
     },
@@ -75,7 +75,7 @@ const Projects = () => {
         "Revenue trends, category performance, and customer segmentation",
         "Structured problem-solving approach to business intelligence questions"
       ],
-      image: "photo-1460925895917-afdab827c52f",
+      image: "photo-JKUTrJ4vK00",
       github: "https://github.com/Yashwanth-Kumar-Kotla/Walmart_Exploratory_Data_Analysis",
       demo: "https://github.com/Yashwanth-Kumar-Kotla/Walmart_Exploratory_Data_Analysis"
     },
@@ -93,7 +93,7 @@ const Projects = () => {
         "End-to-end pipeline: preprocessing → training → deployment",
         "Interpretable results designed for healthcare decision support"
       ],
-      image: "photo-1576091160550-2173dba999ef",
+      image: "photo-ZJaK9jQXeDA",
       github: "https://github.com/Yashwanth-Kumar-Kotla/Streamlit-ML-using-Diabetes-Prediction-Model",
       demo: "https://diabetespredictionusing.streamlit.app"
     },
@@ -111,7 +111,7 @@ const Projects = () => {
         "Feature importance analysis for clinical interpretability",
         "Demonstrates understanding of evaluation metrics beyond accuracy"
       ],
-      image: "photo-1559757175-5700dde675bc",
+      image: "photo-gKUC4TMhOiY",
       github: "https://github.com/Yashwanth-Kumar-Kotla/Breast-cancer-detection-using-ML",
       demo: "https://github.com/Yashwanth-Kumar-Kotla/Breast-cancer-detection-using-ML"
     }

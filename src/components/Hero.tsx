@@ -1,126 +1,137 @@
-import { ArrowRight, Download, Mail, Eye } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { useEffect, useRef } from "react";
+import { ArrowUpRight, Github, Linkedin, FileText, MapPin } from "lucide-react";
+
+const stats = [
+  { value: "8+", label: "Projects shipped" },
+  { value: "4",  label: "Live ML apps" },
+  { value: "2+", label: "Yrs hands-on" },
+];
+
+const tools = [
+  "Python", "PyTorch", "XGBoost", "LangChain", "LangGraph", "FastAPI",
+  "Docker", "MLflow", "FinBERT", "SHAP", "Scikit-learn", "AWS",
+];
 
 const Hero = () => {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    element?.scrollIntoView({
-      behavior: "smooth",
-    });
-  };
+  const spotlightRef = useRef<HTMLDivElement>(null);
+
+  // Mouse-tracking spotlight (transform/opacity only; skipped under reduced-motion)
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    const el = spotlightRef.current;
+    if (!el) return;
+
+    let frame = 0;
+    const onMove = (e: MouseEvent) => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        el.style.background = `radial-gradient(600px circle at ${e.clientX}px ${e.clientY}px, hsl(255 70% 64% / 0.10), transparent 70%)`;
+      });
+    };
+    window.addEventListener("mousemove", onMove);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  const scrollToSection = (id: string) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800"
+      className="relative min-h-[100svh] flex items-center justify-center overflow-hidden grain"
     >
-      {/* Animated background elements */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500 rounded-full filter blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-teal-500 rounded-full filter blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-3/4 left-1/2 w-32 h-32 bg-purple-400 rounded-full filter blur-2xl animate-pulse delay-500"></div>
-      </div>
+      {/* layered backdrop */}
+      <div className="absolute inset-0 bg-grid opacity-60" />
+      <div className="absolute inset-0 bg-vignette" />
+      <div ref={spotlightRef} className="pointer-events-none absolute inset-0 hidden md:block" />
 
-      {/* Floating ML/AI elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(12)].map((_, i) => (
-          <div
-            key={i}
-            className={`absolute text-blue-300/30 font-mono text-sm animate-float`}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: `${3 + Math.random() * 2}s`,
-            }}
-          >
-            {
-              [
-                "model.fit()",
-                "TensorFlow",
-                "PyTorch",
-                "Scikit-learn",
-                "XGBoost",
-                "neural_net",
-                "predict()",
-                "accuracy: 0.96",
-                "loss: 0.04",
-                "epochs=100",
-                "batch_size",
-                "GPT-4",
-              ][i % 12]
-            }
-          </div>
-        ))}
-      </div>
-
-      <div className="container mx-auto px-6 text-center text-white relative z-10">
-        <div className="animate-fade-in">
-          {/* Profile Picture */}
-          <div className="mb-8 flex justify-center">
-            <Avatar className="w-32 h-32 md:w-40 md:h-40 border-4 border-white/20 shadow-2xl">
-              <AvatarImage
-                src="/lovable-uploads/bff2161f-7ca7-46b0-b34b-0fe852119fb7.png"
-                alt="Yashwanth Kumar Kotla Profile Picture"
-                className="object-cover"
-              />
-              <AvatarFallback className="bg-gradient-to-br from-blue-600 to-teal-600 text-white text-2xl md:text-3xl font-bold">
-                YK
-              </AvatarFallback>
-            </Avatar>
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 pt-28 pb-16">
+        <div className="flex flex-col items-center text-center">
+          {/* status */}
+          <div className="animate-fade-in inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs text-zinc-400 mb-8 backdrop-blur-sm">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-70 animate-ping" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+            </span>
+            Available for full-time roles
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-teal-200 bg-clip-text text-transparent">
-            Yashwanth Kumar Kotla
+          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight leading-[1.02] mb-6">
+            <span className="text-gradient">Yashwanth</span>
+            <br />
+            <span className="text-gradient">Kumar Kotla</span>
           </h1>
-          <h2 className="text-2xl md:text-3xl mb-6 text-blue-200 font-light">
-            Data Scientist | Machine Learning Engineer
-          </h2>
-          <p className="text-xl mb-8 text-gray-300 max-w-2xl mx-auto">
-            Building intelligent systems with Machine Learning and AI. 
-            Transforming data into predictive models and actionable insights.
+
+          <p className="font-mono text-sm text-primary/90 mb-5 tracking-wide">
+            Data Scientist &nbsp;/&nbsp; AI Engineer
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center flex-wrap">
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-8 py-3 text-lg group"
+          <p className="text-base md:text-lg text-zinc-400 max-w-2xl leading-relaxed mb-9">
+            I build end-to-end machine learning systems, from data pipelines and
+            predictive models to <span className="text-zinc-200">agentic AI</span> applications
+            deployed in production. Turning raw data into intelligent products that ship.
+          </p>
+
+          <div className="flex flex-wrap gap-3 justify-center mb-8">
+            <button
               onClick={() => scrollToSection("projects")}
+              className="group inline-flex items-center gap-2 px-5 py-2.5 bg-primary hover:bg-primary/90 text-white text-sm font-medium rounded-lg transition-colors"
             >
-              View My Projects
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
-
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white px-8 py-3 text-lg"
-              onClick={() => scrollToSection("contact")}
+              View my work
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </button>
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/[0.04] border border-white/[0.1] hover:border-white/25 text-zinc-200 text-sm font-medium rounded-lg transition-colors backdrop-blur-sm"
             >
-              <Mail className="mr-2 h-5 w-5" />
-              Hire Me
-            </Button>
-
-            {/* View Resume */}
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-teal-400 text-teal-400 hover:bg-teal-400 hover:text-white px-8 py-3 text-lg"
-              >
-                <Eye className="mr-2 h-5 w-5" />
-                View Resume
-              </Button>
+              <FileText className="h-4 w-4" />
+              Résumé
             </a>
           </div>
-        </div>
-      </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
+          <div className="flex items-center gap-5 text-zinc-500 mb-14">
+            <a href="https://github.com/Yashwanth-Kumar-Kotla/" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-200 transition-colors" aria-label="GitHub">
+              <Github className="h-5 w-5" />
+            </a>
+            <a href="https://www.linkedin.com/in/yashwanthkumarkotla/" target="_blank" rel="noopener noreferrer" className="hover:text-zinc-200 transition-colors" aria-label="LinkedIn">
+              <Linkedin className="h-5 w-5" />
+            </a>
+            <span className="h-4 w-px bg-zinc-700" />
+            <span className="inline-flex items-center gap-1.5 text-xs">
+              <MapPin className="h-3.5 w-3.5" />
+              Austin, Texas
+            </span>
+          </div>
+
+          {/* stats */}
+          <div className="grid grid-cols-3 gap-px bg-white/[0.06] rounded-xl overflow-hidden border border-white/[0.06] max-w-lg w-full mb-14">
+            {stats.map((s) => (
+              <div key={s.label} className="bg-zinc-950/60 px-4 py-5 text-center backdrop-blur-sm">
+                <div className="font-display text-2xl md:text-3xl font-bold text-zinc-50 tabular-nums">{s.value}</div>
+                <div className="text-[11px] text-zinc-500 mt-1 leading-tight">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* tools marquee */}
+        <div className="marquee-mask overflow-hidden">
+          <div className="flex w-max gap-3 animate-marquee">
+            {[...tools, ...tools].map((tool, i) => (
+              <span
+                key={i}
+                className="flex-shrink-0 font-mono text-xs px-3 py-1.5 rounded-md bg-white/[0.03] border border-white/[0.06] text-zinc-500"
+              >
+                {tool}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </section>

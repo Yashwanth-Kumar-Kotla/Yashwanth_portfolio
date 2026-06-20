@@ -1,193 +1,87 @@
-import { Code, Database, Brain, Cpu, Sparkles, Users, Star, BarChart3 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Sparkles, Brain, Code2, Cpu, Database, BarChart3 } from "lucide-react";
+import Reveal from "@/components/Reveal";
+
+const categories = [
+  {
+    icon: Sparkles,
+    title: "AI & LLMs",
+    tag: "core",
+    skills: ["LangChain", "LangGraph", "Agentic AI", "RAG", "OpenAI GPT-4", "Google Gemini", "Multi-Agent Systems", "Prompt Engineering"],
+  },
+  {
+    icon: Brain,
+    title: "Machine Learning",
+    tag: "core",
+    skills: ["XGBoost", "LightGBM", "Scikit-learn", "SHAP", "Uplift Modeling", "Causal Inference", "Calibration", "Feature Engineering"],
+  },
+  {
+    icon: Code2,
+    title: "Languages & Frameworks",
+    skills: ["Python", "SQL", "FastAPI", "PyTorch", "TensorFlow", "Transformers", "FinBERT", "Streamlit"],
+  },
+  {
+    icon: Cpu,
+    title: "MLOps & Cloud",
+    skills: ["Docker", "MLflow", "GitHub Actions", "CI/CD", "AWS", "GCP", "Model Monitoring", "Drift Detection"],
+  },
+  {
+    icon: Database,
+    title: "Data Engineering",
+    skills: ["PostgreSQL", "MySQL", "ETL Pipelines", "Pandas", "NumPy", "Data Modeling", "Feature Stores"],
+  },
+  {
+    icon: BarChart3,
+    title: "Analytics & Viz",
+    skills: ["Tableau", "Power BI", "Plotly", "A/B Testing", "Hypothesis Testing", "EDA", "Statistical Modeling"],
+  },
+];
 
 const Skills = () => {
-  const technicalSkills = [
-    { 
-      name: "Python", 
-      level: "Advanced", 
-      tools: ["NumPy", "Pandas", "Matplotlib", "Seaborn", "Plotly"],
-      stars: 5
-    },
-    { 
-      name: "Machine Learning", 
-      level: "Advanced", 
-      tools: ["Scikit-learn", "XGBoost", "LightGBM", "Feature Engineering"],
-      stars: 5
-    },
-    { 
-      name: "Deep Learning", 
-      level: "Intermediate", 
-      tools: ["TensorFlow", "PyTorch", "Neural Networks", "CNNs"],
-      stars: 4
-    },
-    { 
-      name: "SQL & Databases", 
-      level: "Advanced", 
-      tools: ["PostgreSQL", "MySQL", "Data Modeling", "Query Optimization"],
-      stars: 4
-    },
-    { 
-      name: "Data Visualization", 
-      level: "Advanced", 
-      tools: ["Plotly", "Seaborn", "Matplotlib", "Streamlit"],
-      stars: 5
-    },
-    { 
-      name: "MLOps & Deployment", 
-      level: "Intermediate", 
-      tools: ["Git", "Docker", "Vercel", "Hugging Face", "APIs"],
-      stars: 3
-    },
-  ];
-
-  const softSkills = [
-    { name: "Problem Solving", level: "Expert" },
-    { name: "Analytical Thinking", level: "Advanced" },
-    { name: "Research & Learning", level: "Expert" },
-    { name: "Communication", level: "Advanced" },
-    { name: "Team Collaboration", level: "Advanced" },
-    { name: "Critical Thinking", level: "Advanced" },
-  ];
-
-  const expertiseAreas = [
-    {
-      icon: Brain,
-      title: "Machine Learning",
-      description: "Classification, Regression, Ensemble methods, Model tuning"
-    },
-    {
-      icon: Sparkles,
-      title: "AI & LLMs",
-      description: "Multi-agent systems, GPT integration, Prompt engineering"
-    },
-    {
-      icon: BarChart3,
-      title: "Data Science",
-      description: "Statistical analysis, EDA, Feature engineering, Insights"
-    },
-    {
-      icon: Cpu,
-      title: "Model Deployment",
-      description: "End-to-end ML pipelines, APIs, Production systems"
-    }
-  ];
-
-  const renderStars = (count: number) => {
-    return (
-      <div className="flex gap-1">
-        {[...Array(5)].map((_, index) => (
-          <Star
-            key={index}
-            className={`h-4 w-4 transition-colors duration-300 ${
-              index < count 
-                ? "fill-yellow-400 text-yellow-400 hover:fill-cyan-400 hover:text-cyan-400" 
-                : "text-gray-300 hover:text-cyan-200"
-            }`}
-          />
-        ))}
-      </div>
-    );
-  };
-
-  const getLevelColor = (level: string) => {
-    switch (level) {
-      case "Expert":
-        return "bg-green-100 text-green-800 border-green-200 hover:bg-cyan-100 hover:text-cyan-800 hover:border-cyan-300 hover:shadow-lg hover:shadow-cyan-200/50";
-      case "Advanced":
-        return "bg-blue-100 text-blue-800 border-blue-200 hover:bg-cyan-100 hover:text-cyan-800 hover:border-cyan-300 hover:shadow-lg hover:shadow-cyan-200/50";
-      case "Intermediate":
-        return "bg-orange-100 text-orange-800 border-orange-200 hover:bg-cyan-100 hover:text-cyan-800 hover:border-cyan-300 hover:shadow-lg hover:shadow-cyan-200/50";
-      default:
-        return "bg-gray-100 text-gray-800 border-gray-200 hover:bg-cyan-100 hover:text-cyan-800 hover:border-cyan-300 hover:shadow-lg hover:shadow-cyan-200/50";
-    }
-  };
-
   return (
-    <section id="skills" className="py-20 bg-white">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">Skills & Expertise</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-teal-600 mx-auto mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            A comprehensive toolkit for building intelligent ML systems
-          </p>
-        </div>
+    <section id="skills" className="py-28 border-t border-white/[0.06]">
+      <div className="max-w-5xl mx-auto px-6">
+        <Reveal>
+          <div className="mb-12">
+            <span className="font-mono text-xs text-primary tracking-[0.2em] uppercase">Stack</span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-zinc-50 mt-2 tracking-tight">
+              The toolkit
+            </h2>
+            <p className="text-zinc-500 mt-3 max-w-lg">
+              A full-stack ML practice, from model training to agentic AI in production.
+            </p>
+          </div>
+        </Reveal>
 
-        {/* Expertise Areas */}
-        <div className="grid md:grid-cols-4 gap-6 mb-16">
-          {expertiseAreas.map((area, index) => (
-            <Card key={index} className="text-center hover:shadow-lg transition-all duration-300 group cursor-hover">
-              <CardContent className="pt-6">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-100 to-teal-100 rounded-full mb-4 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-cyan-200 group-hover:to-blue-200 group-hover:shadow-lg group-hover:shadow-cyan-200/50 transition-all duration-300">
-                  <area.icon className="h-8 w-8 text-blue-600 group-hover:text-cyan-600 transition-colors duration-300" />
-                </div>
-                <h3 className="font-semibold text-gray-800 mb-2 group-hover:text-cyan-700 transition-colors duration-300">{area.title}</h3>
-                <p className="text-sm text-gray-600 group-hover:text-gray-700 transition-colors duration-300">{area.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Technical Skills */}
-          <Card className="border-t-4 border-t-blue-600 hover:border-t-cyan-500 transition-colors duration-300">
-            <CardHeader>
-              <CardTitle className="flex items-center text-blue-600 hover:text-cyan-600 transition-colors duration-300">
-                <Code className="mr-3 h-6 w-6" />
-                Technical Skills
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {technicalSkills.map((skill, index) => (
-                <div key={index} className="space-y-3 group cursor-hover">
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h4 className="font-semibold text-gray-800 group-hover:text-cyan-700 group-hover:animate-glow transition-all duration-300">{skill.name}</h4>
-                        <Badge className={`${getLevelColor(skill.level)} transition-all duration-300 transform group-hover:scale-105`}>
-                          {skill.level}
-                        </Badge>
-                      </div>
-                      {renderStars(skill.stars)}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {categories.map((cat, i) => (
+            <Reveal key={cat.title} delay={i * 70}>
+              <div className="group h-full rounded-2xl bg-white/[0.02] border border-white/[0.07] p-6 hover:border-white/[0.14] transition-colors">
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center group-hover:bg-primary/10 group-hover:border-primary/25 transition-colors">
+                      <cat.icon className="h-4 w-4 text-zinc-300 group-hover:text-primary transition-colors" strokeWidth={1.75} />
                     </div>
+                    <h3 className="font-display font-semibold text-zinc-50 text-sm">{cat.title}</h3>
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    {skill.tools.map((tool, toolIndex) => (
-                      <Badge 
-                        key={toolIndex} 
-                        variant="outline" 
-                        className="text-xs hover:border-cyan-400 hover:text-cyan-600 hover:bg-cyan-50 hover:shadow-md hover:shadow-cyan-200/30 transition-all duration-300 transform hover:scale-105 cursor-hover"
-                      >
-                        {tool}
-                      </Badge>
-                    ))}
-                  </div>
+                  {cat.tag && (
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-primary/80 px-1.5 py-0.5 rounded border border-primary/20 bg-primary/5">
+                      {cat.tag}
+                    </span>
+                  )}
                 </div>
-              ))}
-            </CardContent>
-          </Card>
-
-          {/* Soft Skills */}
-          <Card className="border-t-4 border-t-teal-600 hover:border-t-cyan-500 transition-colors duration-300">
-            <CardHeader>
-              <CardTitle className="flex items-center text-teal-600 hover:text-cyan-600 transition-colors duration-300">
-                <Users className="mr-3 h-6 w-6" />
-                Soft Skills
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {softSkills.map((skill, index) => (
-                <div key={index} className="flex justify-between items-center p-4 bg-gray-50 rounded-lg hover:bg-cyan-50 hover:shadow-md hover:shadow-cyan-200/30 transition-all duration-300 group cursor-hover">
-                  <h4 className="font-semibold text-gray-800 group-hover:text-cyan-700 group-hover:animate-glow transition-all duration-300">{skill.name}</h4>
-                  <Badge className={`${getLevelColor(skill.level)} transition-all duration-300 transform group-hover:scale-105`}>
-                    {skill.level}
-                  </Badge>
+                <div className="flex flex-wrap gap-1.5">
+                  {cat.skills.map((s) => (
+                    <span
+                      key={s}
+                      className="font-mono text-[11px] px-2 py-1 rounded-md bg-white/[0.03] text-zinc-400 border border-white/[0.06]"
+                    >
+                      {s}
+                    </span>
+                  ))}
                 </div>
-              ))}
-            </CardContent>
-          </Card>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

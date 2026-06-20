@@ -1,116 +1,112 @@
+import { Database, BarChart3, Brain, TrendingUp, Sparkles, Lightbulb, ArrowUpRight } from "lucide-react";
+import Reveal from "@/components/Reveal";
 
-import { Database, BarChart3, Brain, TrendingUp, Users, Lightbulb } from "lucide-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+const services = [
+  {
+    icon: Sparkles,
+    title: "Agentic AI & LLM Apps",
+    description: "Multi-agent systems, RAG pipelines, and LLM products built with LangChain and LangGraph.",
+    features: ["Agent orchestration & tool use", "RAG & retrieval pipelines", "Prompt & evaluation workflows", "GPT-4 / Gemini integration"],
+  },
+  {
+    icon: Brain,
+    title: "ML Model Development",
+    description: "Production-ready models tuned and validated for your specific business problem.",
+    features: ["Classification & regression", "Hyperparameter tuning & CV", "Interpretability (SHAP, LIME)", "End-to-end pipeline design"],
+  },
+  {
+    icon: TrendingUp,
+    title: "Predictive Analytics",
+    description: "Forecasting and risk models that anticipate trends and outcomes with rigor.",
+    features: ["Time-series (ARIMA, Prophet, LSTM)", "Churn & retention modeling", "Demand & revenue forecasting", "Uncertainty quantification"],
+  },
+  {
+    icon: Database,
+    title: "Data & Feature Engineering",
+    description: "Solid data foundations and high-signal features that lift model performance.",
+    features: ["ETL pipeline design", "Feature selection & reduction", "Reproducible ML workflows", "pandas & SQL at scale"],
+  },
+  {
+    icon: BarChart3,
+    title: "Causal & Statistical Analysis",
+    description: "Rigorous methods to validate assumptions and quantify real effects.",
+    features: ["A/B testing & experiments", "Causal inference & uplift", "Regression & multivariate", "Bayesian inference"],
+  },
+  {
+    icon: Lightbulb,
+    title: "AI-Powered Insights",
+    description: "Model output translated into clear, executive-ready narratives that drive decisions.",
+    features: ["Dashboards & automated reports", "Data storytelling", "ROI & KPI tracking", "Evidence-based recommendations"],
+  },
+];
 
 const Services = () => {
-  const services = [
-    {
-      icon: Brain,
-      title: "Machine Learning Model Development",
-      description: "Design, train, and validate production-ready ML models tailored to your business problem.",
-      features: ["Classification & regression modeling", "Hyperparameter tuning & cross-validation", "Model interpretability (SHAP, LIME)", "End-to-end pipeline design"]
-    },
-    {
-      icon: TrendingUp,
-      title: "Predictive Analytics & Forecasting",
-      description: "Anticipate future trends and outcomes with statistically robust forecasting models.",
-      features: ["Time-series analysis (ARIMA, Prophet, LSTM)", "Demand & revenue forecasting", "Churn prediction & retention modeling", "Scenario simulation & uncertainty quantification"]
-    },
-    {
-      icon: Database,
-      title: "Data Engineering & Feature Engineering",
-      description: "Build solid data foundations and craft high-signal features that supercharge model performance.",
-      features: ["ETL pipeline design & automation", "Feature selection & dimensionality reduction", "Data wrangling at scale with pandas & SQL", "Reproducible ML workflows"]
-    },
-    {
-      icon: BarChart3,
-      title: "Statistical Analysis & Hypothesis Testing",
-      description: "Apply rigorous statistical methods to validate assumptions and extract trustworthy insights.",
-      features: ["A/B testing & experiment design", "Regression & multivariate analysis", "Distribution fitting & Bayesian inference", "Causal inference & confounding control"]
-    },
-    {
-      icon: Lightbulb,
-      title: "NLP & Text Analytics",
-      description: "Unlock value from unstructured text data using modern natural language processing techniques.",
-      features: ["Sentiment analysis & opinion mining", "Topic modeling (LDA, BERTopic)", "Named entity recognition & text classification", "Transformer-based model fine-tuning"]
-    },
-    {
-      icon: Users,
-      title: "AI-Powered Insights & Reporting",
-      description: "Translate complex model outputs into clear, executive-ready narratives that drive decisions.",
-      features: ["Interactive dashboards & automated reports", "Data storytelling for non-technical stakeholders", "ROI measurement & KPI tracking", "Strategic recommendations grounded in evidence"]
-    }
-  ];
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const scrollToSection = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <section id="services" className="py-20 bg-white">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">Services</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-teal-600 mx-auto mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            End-to-end data science services — from raw data to deployed models — that give you a measurable competitive edge
-          </p>
-        </div>
+    <section id="services" className="py-28 border-t border-white/[0.06]">
+      <div className="max-w-5xl mx-auto px-6">
+        <Reveal>
+          <div className="mb-12">
+            <span className="font-mono text-xs text-primary tracking-[0.2em] uppercase">Services</span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-zinc-50 mt-2 tracking-tight">
+              How I can help
+            </h2>
+            <p className="text-zinc-500 mt-3 max-w-lg">
+              From raw data to deployed models and AI products that move the needle.
+            </p>
+          </div>
+        </Reveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {services.map((service, index) => (
-            <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-t-4 border-t-transparent hover:border-t-blue-600">
-              <CardHeader className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-100 to-teal-100 rounded-full mb-4 group-hover:scale-110 transition-transform">
-                  <service.icon className="h-8 w-8 text-blue-600" />
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-14">
+          {services.map((service, i) => (
+            <Reveal key={service.title} delay={i * 60}>
+              <div className="group h-full rounded-2xl bg-white/[0.02] border border-white/[0.07] p-6 hover:border-white/[0.14] transition-colors">
+                <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center mb-5 group-hover:bg-primary/10 group-hover:border-primary/25 transition-colors">
+                  <service.icon className="h-5 w-5 text-zinc-300 group-hover:text-primary transition-colors" strokeWidth={1.75} />
                 </div>
-                <CardTitle className="text-xl mb-2">{service.title}</CardTitle>
-                <CardDescription className="text-base">
-                  {service.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
-                  {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-start text-sm text-gray-600">
-                      <div className="w-2 h-2 bg-teal-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                      {feature}
+                <h3 className="font-display font-semibold text-zinc-50 mb-2">{service.title}</h3>
+                <p className="text-sm text-zinc-500 mb-4 leading-relaxed">{service.description}</p>
+                <ul className="space-y-1.5">
+                  {service.features.map((f) => (
+                    <li key={f} className="flex items-start gap-2.5 text-xs text-zinc-500">
+                      <span className="mt-1.5 w-1 h-1 rounded-full bg-zinc-600 flex-shrink-0" />
+                      {f}
                     </li>
                   ))}
                 </ul>
-              </CardContent>
-            </Card>
+              </div>
+            </Reveal>
           ))}
         </div>
 
-        {/* Collaboration Section */}
-        <div className="bg-gradient-to-r from-blue-50 to-teal-50 rounded-2xl p-8 md:p-12 text-center">
-          <h3 className="text-3xl font-bold text-gray-800 mb-4">
-            Open for Freelance Projects & Collaborations
-          </h3>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Ready to build something intelligent with your data? Let's collaborate to engineer solutions that predict, classify, and deliver real business value.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white px-8 py-3"
-              onClick={() => scrollToSection('contact')}
-            >
-              Start a Project
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-3"
-              onClick={() => scrollToSection('contact')}
-            >
-              Schedule a Consultation
-            </Button>
+        <Reveal>
+          <div className="relative overflow-hidden rounded-2xl border border-white/[0.08] p-10 md:p-12 text-center">
+            <div
+              className="absolute inset-0 opacity-50"
+              style={{ background: "radial-gradient(60% 100% at 50% 0%, hsl(255 70% 64% / 0.18), transparent 70%)" }}
+            />
+            <div className="relative">
+              <h3 className="font-display text-2xl md:text-3xl font-bold text-zinc-50 mb-3">
+                Have a problem worth modeling?
+              </h3>
+              <p className="text-zinc-400 mb-8 max-w-xl mx-auto">
+                I'm open to full-time roles and meaningful collaborations. Let's build something intelligent with your data.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <button onClick={() => scrollToSection("contact")}
+                  className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors">
+                  Start a conversation
+                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </button>
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-sm font-medium bg-white/[0.04] border border-white/[0.1] hover:border-white/25 text-zinc-200 rounded-lg transition-colors">
+                  Download résumé
+                </a>
+              </div>
+            </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

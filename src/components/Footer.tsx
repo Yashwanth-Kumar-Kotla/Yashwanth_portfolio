@@ -1,104 +1,67 @@
-
 import { Github, Linkedin, Mail, ArrowUp } from "lucide-react";
-import { Button } from "@/components/ui/button";
+
+const links = [
+  { label: "About", id: "about" },
+  { label: "Skills", id: "skills" },
+  { label: "Work", id: "projects" },
+  { label: "Services", id: "services" },
+  { label: "Contact", id: "contact" },
+];
 
 const Footer = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  const scrollToSection = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   return (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-4 gap-8">
-          {/* Brand Section */}
-          <div className="md:col-span-2">
-            <h3 className="text-2xl font-bold mb-4">
-              Yashwanth Kumar Kotla<span className="text-blue-400">.</span>
-            </h3>
-            <p className="text-gray-400 mb-6 max-w-md">
-              Aspiring Data Scientist passionate about building intelligent models and engineering
-              data-driven solutions that create measurable business impact.
-            </p>
-            <div className="flex space-x-4">
-              <a
-                href="mailto:kotla.yashwanthkumar@gmail.com"
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
-              >
-                <Mail className="h-5 w-5" />
-              </a>
-              <a
-                href="https://github.com/Yashwanth-Kumar-Kotla/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-              <a
-                href="https://github.com/Yashwanth-Kumar-Kotla/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
+    <footer className="border-t border-white/[0.06]">
+      <div className="max-w-5xl mx-auto px-6 py-14">
+        <div className="grid md:grid-cols-3 gap-10 mb-12">
+          <div className="md:col-span-1">
+            <div className="font-display text-lg font-bold text-zinc-50 mb-3">
+              yash<span className="text-primary">.</span>
             </div>
+            <p className="text-sm text-zinc-500 leading-relaxed max-w-xs">
+              Data Scientist & AI Engineer building intelligent ML systems and agentic AI products.
+            </p>
           </div>
 
-          {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              {["About", "Skills", "Projects", "Services", "Contact"].map((item) => (
-                <li key={item}>
-                  <button
-                    onClick={() => {
-                      const element = document.getElementById(item.toLowerCase());
-                      element?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="text-gray-400 hover:text-white transition-colors"
-                  >
-                    {item}
+            <h4 className="font-mono text-[11px] uppercase tracking-wider text-zinc-600 mb-4">Navigate</h4>
+            <ul className="space-y-2.5">
+              {links.map((item) => (
+                <li key={item.id}>
+                  <button onClick={() => scrollToSection(item.id)} className="text-sm text-zinc-500 hover:text-zinc-100 transition-colors">
+                    {item.label}
                   </button>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Services */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Services</h4>
-            <ul className="space-y-2 text-gray-400 text-sm">
-              <li>Machine Learning</li>
-              <li>Predictive Analytics</li>
-              <li>NLP & Text Analytics</li>
-              <li>Statistical Modeling</li>
-              <li>Feature Engineering</li>
-              <li>AI-Powered Insights</li>
-            </ul>
+            <h4 className="font-mono text-[11px] uppercase tracking-wider text-zinc-600 mb-4">Elsewhere</h4>
+            <div className="flex items-center gap-2.5">
+              <a href="mailto:yashwanthkumarkotla@gmail.com" className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-zinc-400 hover:text-zinc-50 hover:border-white/25 transition-colors" aria-label="Email">
+                <Mail className="h-4 w-4" />
+              </a>
+              <a href="https://github.com/Yashwanth-Kumar-Kotla/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-zinc-400 hover:text-zinc-50 hover:border-white/25 transition-colors" aria-label="GitHub">
+                <Github className="h-4 w-4" />
+              </a>
+              <a href="https://www.linkedin.com/in/yashwanthkumarkotla/" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-lg bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-zinc-400 hover:text-zinc-50 hover:border-white/25 transition-colors" aria-label="LinkedIn">
+                <Linkedin className="h-4 w-4" />
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
-            © 2024 Yashwanth Kumar Kotla. All rights reserved.
+        <div className="border-t border-white/[0.06] pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="font-mono text-xs text-zinc-600">
+            © {new Date().getFullYear()} Yashwanth Kumar Kotla
           </p>
-          <div className="flex items-center space-x-6 mt-4 md:mt-0">
-            <p className="text-gray-400 text-sm">
-              Built with React & Tailwind CSS
-            </p>
-            <Button
-              onClick={scrollToTop}
-              variant="ghost"
-              size="sm"
-              className="text-gray-400 hover:text-white"
-            >
-              <ArrowUp className="h-4 w-4 mr-1" />
-              Back to Top
-            </Button>
-          </div>
+          <button onClick={scrollToTop} className="group inline-flex items-center gap-1.5 text-xs text-zinc-600 hover:text-zinc-300 transition-colors">
+            Back to top
+            <ArrowUp className="h-3 w-3 transition-transform group-hover:-translate-y-0.5" />
+          </button>
         </div>
       </div>
     </footer>

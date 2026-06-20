@@ -1,280 +1,133 @@
-
 import { useState } from "react";
-import { Mail, MapPin, Phone, Send, Github, Linkedin, MessageSquare } from "lucide-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Mail, Send, Github, Linkedin, ArrowUpRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import emailjs from '@emailjs/browser';
+import Reveal from "@/components/Reveal";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: ""
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const validateForm = () => {
-    const { name, email, subject, message } = formData;
-    if (!name.trim() || !email.trim() || !subject.trim() || !message.trim()) {
-      toast({
-        title: "Please fill out all fields.",
-        description: "All form fields are required to send your message.",
-        variant: "destructive",
-      });
-      return false;
-    }
-    
-    // Basic email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      toast({
-        title: "Invalid email address.",
-        description: "Please enter a valid email address.",
-        variant: "destructive",
-      });
-      return false;
-    }
-    
-    return true;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!validateForm()) {
+    const { name, email, subject, message } = formData;
+    if (!name.trim() || !email.trim() || !subject.trim() || !message.trim()) {
+      toast({ title: "Please fill out all fields.", variant: "destructive" });
       return;
     }
-    
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast({ title: "Please enter a valid email address.", variant: "destructive" });
+      return;
+    }
     setIsSubmitting(true);
-    
     try {
-      {
-        await emailjs.send(
-          'service_oytre3a',
-          'template_vdxa30o',
-          {
-            from_name: formData.name,
-            name: formData.name,
-            from_email: formData.email,
-            email: formData.email,
-            reply_to: formData.email,
-            subject: formData.subject,
-            message: formData.message,
-          },
-          'BeDdJGGyyHzh4gEG5'
-        );
-        
-        toast({
-          title: "Message sent successfully!",
-          description: "Thank you for reaching out. I'll get back to you within 24 hours.",
-        });
-        
-        setFormData({
-          name: "",
-          email: "",
-          subject: "",
-          message: ""
-        });
-      }
-    } catch (error) {
-      console.error('EmailJS error:', error);
-      toast({
-        title: "Failed to send message.",
-        description: "Please try again later or contact me directly via email.",
-        variant: "destructive",
-      });
+      await emailjs.send("service_oytre3a", "template_vdxa30o", {
+        from_name: name, name, from_email: email, email, reply_to: email, subject, message,
+      }, "BeDdJGGyyHzh4gEG5");
+      toast({ title: "Message sent!", description: "I'll get back to you within 24 hours." });
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch {
+      toast({ title: "Failed to send.", description: "Please email me directly at yashwanthkumarkotla@gmail.com", variant: "destructive" });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: "Email",
-      value: "kotla.yashwanthkumar@gmail.com",
-      link: "mailto:kotla.yashwanthkumar@gmail.com"
-    },
-    {
-      icon: Github,
-      title: "GitHub",
-      value: "github.com/Yashwanth-Kumar-Kotla",
-      link: "https://github.com/Yashwanth-Kumar-Kotla/"
-    },
-    {
-      icon: Linkedin,
-      title: "LinkedIn",
-      value: "Connect with me",
-      link: "https://www.linkedin.com/in/yashwanthkumarkotla"
-    }
+  const socials = [
+    { icon: Mail, label: "Email", value: "yashwanthkumarkotla@gmail.com", href: "mailto:yashwanthkumarkotla@gmail.com" },
+    { icon: Github, label: "GitHub", value: "Yashwanth-Kumar-Kotla", href: "https://github.com/Yashwanth-Kumar-Kotla/" },
+    { icon: Linkedin, label: "LinkedIn", value: "yashwanthkumarkotla", href: "https://www.linkedin.com/in/yashwanthkumarkotla/" },
   ];
 
+  const inputClass =
+    "w-full px-4 py-2.5 rounded-lg bg-white/[0.03] border border-white/[0.1] text-zinc-100 placeholder:text-zinc-600 text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-colors";
+  const labelClass = "block font-mono text-[11px] uppercase tracking-wider text-zinc-500 mb-1.5";
+
   return (
-    <section id="contact" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">Get In Touch</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-teal-600 mx-auto mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Ready to turn your data into actionable insights? Let's discuss your project and explore how we can work together.
-          </p>
-        </div>
+    <section id="contact" className="py-28 border-t border-white/[0.06]">
+      <div className="max-w-5xl mx-auto px-6">
+        <Reveal>
+          <div className="mb-12">
+            <span className="font-mono text-xs text-primary tracking-[0.2em] uppercase">Contact</span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-zinc-50 mt-2 tracking-tight">
+              Let's build something
+            </h2>
+            <p className="text-zinc-500 mt-3 max-w-lg">
+              Open to full-time roles and interesting collaborations.
+            </p>
+          </div>
+        </Reveal>
 
-        <div className="grid lg:grid-cols-3 gap-12">
-          {/* Contact Information */}
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-6">Let's Connect</h3>
-              <p className="text-gray-600 mb-8">
-                Whether you have a project in mind, need consultation, or just want to say hello, 
-                I'm always excited to discuss data science opportunities.
-              </p>
-            </div>
-
-            <div className="space-y-6">
-              {contactInfo.map((info, index) => (
-                <a
-                  key={index}
-                  href={info.link}
-                  target={info.link.startsWith('mailto:') ? '_self' : '_blank'}
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow group cursor-hover"
-                >
-                  <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-teal-100 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <info.icon className="h-6 w-6 text-blue-600" />
-                    </div>
+        <div className="grid lg:grid-cols-5 gap-6">
+          <Reveal className="lg:col-span-2" delay={60}>
+            <div className="space-y-3">
+              {socials.map((s) => (
+                <a key={s.label} href={s.href}
+                  target={s.href.startsWith("mailto:") ? "_self" : "_blank"} rel="noopener noreferrer"
+                  className="group flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.07] hover:border-white/[0.16] transition-colors">
+                  <div className="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.08] flex items-center justify-center flex-shrink-0 group-hover:bg-primary/10 group-hover:border-primary/25 transition-colors">
+                    <s.icon className="h-4 w-4 text-zinc-300 group-hover:text-primary transition-colors" strokeWidth={1.75} />
                   </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-800">{info.title}</h4>
-                    <p className="text-gray-600 text-sm">{info.value}</p>
+                  <div className="min-w-0">
+                    <div className="font-mono text-[10px] uppercase tracking-wider text-zinc-600">{s.label}</div>
+                    <div className="text-sm text-zinc-300 group-hover:text-zinc-50 transition-colors truncate">{s.value}</div>
                   </div>
+                  <ArrowUpRight className="h-4 w-4 text-zinc-600 ml-auto group-hover:text-zinc-300 transition-colors" />
                 </a>
               ))}
+              <div className="p-5 rounded-xl bg-white/[0.02] border border-white/[0.07]">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <span className="text-sm font-medium text-zinc-100">Currently available</span>
+                </div>
+                <p className="text-xs text-zinc-500 leading-relaxed">
+                  Based in Austin, TX. I typically reply within 24 hours.
+                </p>
+              </div>
             </div>
+          </Reveal>
 
-            <div className="bg-gradient-to-br from-blue-50 to-teal-50 p-6 rounded-lg">
-              <h4 className="font-semibold text-gray-800 mb-3">Quick Response Guarantee</h4>
-              <p className="text-gray-600 text-sm">
-                I typically respond to all inquiries within 24 hours. For urgent projects, 
-                feel free to mention it in your message.
-              </p>
-            </div>
-          </div>
-
-          {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <Card className="shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center text-2xl">
-                  <MessageSquare className="mr-3 h-6 w-6 text-blue-600" />
-                  Send a Message
-                </CardTitle>
-                <CardDescription>
-                  Fill out the form below and I'll get back to you as soon as possible.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium text-gray-700">
-                        Full Name *
-                      </label>
-                      <Input
-                        id="name"
-                        name="name"
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        placeholder="Your full name"
-                        className="w-full cursor-hover"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium text-gray-700">
-                        Email Address *
-                      </label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        placeholder="your.email@example.com"
-                        className="w-full cursor-hover"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-medium text-gray-700">
-                      Subject *
-                    </label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      type="text"
-                      required
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      placeholder="What's this about?"
-                      className="w-full cursor-hover"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium text-gray-700">
-                      Message *
-                    </label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      required
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      placeholder="Tell me about your project, timeline, and any specific requirements..."
-                      rows={6}
-                      className="w-full resize-none cursor-hover"
-                    />
-                  </div>
-                  
-                  <Button 
-                    type="submit" 
-                    disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white py-3 text-lg cursor-hover"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="mr-2 h-5 w-5" />
-                        Send Message
-                      </>
-                    )}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </div>
+          <Reveal className="lg:col-span-3" delay={120}>
+            <form onSubmit={handleSubmit} className="rounded-2xl bg-white/[0.02] border border-white/[0.07] p-6 space-y-4">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label htmlFor="name" className={labelClass}>Name</label>
+                  <input id="name" name="name" type="text" required value={formData.name} onChange={handleInputChange} placeholder="Your name" className={inputClass} />
+                </div>
+                <div>
+                  <label htmlFor="email" className={labelClass}>Email</label>
+                  <input id="email" name="email" type="email" required value={formData.email} onChange={handleInputChange} placeholder="you@email.com" className={inputClass} />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="subject" className={labelClass}>Subject</label>
+                <input id="subject" name="subject" type="text" required value={formData.subject} onChange={handleInputChange} placeholder="What's this about?" className={inputClass} />
+              </div>
+              <div>
+                <label htmlFor="message" className={labelClass}>Message</label>
+                <textarea id="message" name="message" required value={formData.message} onChange={handleInputChange} placeholder="Tell me about the role, project, or idea..." rows={5} className={`${inputClass} resize-none`} />
+              </div>
+              <button type="submit" disabled={isSubmitting}
+                className="w-full py-3 text-sm font-medium rounded-lg bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed text-white transition-colors flex items-center justify-center gap-2">
+                {isSubmitting ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send className="h-4 w-4" /> Send message
+                  </>
+                )}
+              </button>
+            </form>
+          </Reveal>
         </div>
       </div>
     </section>

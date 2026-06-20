@@ -1,124 +1,107 @@
-
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Menu, X, ArrowUpRight } from "lucide-react";
+import { useScrollSpy } from "@/hooks/useScrollSpy";
+
+const navItems = [
+  { label: "About",    id: "about" },
+  { label: "Skills",   id: "skills" },
+  { label: "Work",     id: "projects" },
+  { label: "Services", id: "services" },
+  { label: "Contact",  id: "contact" },
+];
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const activeId = useScrollSpy(["hero", ...navItems.map((n) => n.id)]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 24);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    element?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
     setIsMenuOpen(false);
   };
 
-  const navItems = [
-    { label: "Home", id: "hero" },
-    { label: "About", id: "about" },
-    { label: "Skills", id: "skills" },
-    { label: "Projects", id: "projects" },
-    { label: "Services", id: "services" },
-    { label: "Contact", id: "contact" },
-  ];
-
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white/95 backdrop-blur-md shadow-lg' 
-        : 'bg-transparent'
-    }`}>
-      <div className="container mx-auto px-6">
+    <nav
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-zinc-950/80 backdrop-blur-xl border-b border-white/[0.06]"
+          : "bg-transparent border-b border-transparent"
+      }`}
+    >
+      <div className="max-w-5xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
-          {/* Enhanced YK Logo with Cool Animations */}
-          <div 
-            className="cursor-pointer group relative"
-            onClick={() => scrollToSection('hero')}
+          <button
+            onClick={() => scrollToSection("hero")}
+            className="font-display text-lg font-bold text-zinc-50 tracking-tight hover:opacity-80 transition-opacity"
           >
-            <div className={`relative inline-flex items-center justify-center w-12 h-12 rounded-xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-12 ${
-              isScrolled 
-                ? 'bg-gradient-to-br from-blue-600 to-teal-600 shadow-lg' 
-                : 'bg-white/10 backdrop-blur-sm border border-white/20'
-            }`}>
-              <span className={`text-xl font-bold transition-all duration-300 group-hover:scale-125 ${
-                isScrolled ? 'text-white' : 'text-white'
-              }`}>
-                YK
-              </span>
-              
-              {/* Rotating border on hover */}
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-400 via-purple-500 to-teal-400 opacity-0 group-hover:opacity-100 group-hover:animate-spin transition-all duration-500 -z-10 blur-sm"></div>
-              
-              {/* Pulsing glow effect */}
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-400 to-teal-400 opacity-0 group-hover:opacity-30 group-hover:animate-pulse transition-all duration-300 blur-md -z-10"></div>
-              
-              {/* Expanding ring effect */}
-              <div className="absolute inset-0 rounded-xl border-2 border-blue-400 opacity-0 group-hover:opacity-100 group-hover:scale-150 transition-all duration-700 ease-out"></div>
-            </div>
+            yash<span className="text-primary">.</span>
+          </button>
+
+          <div className="hidden md:flex items-center gap-1">
+            {navItems.map((item) => {
+              const active = activeId === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`relative px-3.5 py-2 text-sm rounded-md transition-colors ${
+                    active ? "text-zinc-50" : "text-zinc-400 hover:text-zinc-100"
+                  }`}
+                >
+                  {item.label}
+                  {active && (
+                    <span className="absolute inset-x-3.5 -bottom-px h-px bg-primary" />
+                  )}
+                </button>
+              );
+            })}
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`text-sm font-medium transition-colors hover:text-blue-600 ${
-                  isScrolled ? 'text-gray-700' : 'text-white'
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-            <Button 
-              onClick={() => scrollToSection('contact')}
-              className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white"
+          <div className="hidden md:block">
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="group inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium bg-zinc-50 text-zinc-950 rounded-md hover:bg-white transition-colors"
             >
-              Hire Me
-            </Button>
+              Let's talk
+              <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={isScrolled ? 'text-gray-800' : 'text-white'}
-            >
-              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </Button>
-          </div>
+          <button
+            className="md:hidden text-zinc-300 hover:text-zinc-50 transition-colors p-1"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
 
-        {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 bg-white/95 backdrop-blur-md rounded-lg mt-2 shadow-lg">
-            <div className="flex flex-col space-y-4 px-4">
+          <div className="md:hidden pb-5 pt-1 border-t border-white/[0.06]">
+            <div className="flex flex-col gap-1 mt-3">
               {navItems.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-left text-gray-700 hover:text-blue-600 transition-colors py-2"
+                  className={`text-left text-sm px-3 py-2.5 rounded-md transition-colors ${
+                    activeId === item.id ? "text-zinc-50 bg-white/[0.04]" : "text-zinc-400"
+                  }`}
                 >
                   {item.label}
                 </button>
               ))}
-              <Button 
-                onClick={() => scrollToSection('contact')}
-                className="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white mt-4"
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="mt-2 px-4 py-2.5 text-sm font-medium bg-zinc-50 text-zinc-950 rounded-md w-full"
               >
-                Hire Me
-              </Button>
+                Let's talk
+              </button>
             </div>
           </div>
         )}

@@ -1,273 +1,349 @@
-import { useState } from "react";
-import { ExternalLink, Github, Brain, Heart, BarChart3, Layers, Sparkles, ShoppingCart } from "lucide-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { ExternalLink, Github, Sparkles, Shield, TrendingDown, Repeat, ArrowUpRight } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import Reveal from "@/components/Reveal";
+import ProjectCover, { type CoverMotif } from "@/components/ProjectCover";
+
+type Status = "live" | "building";
+
+interface Project {
+  id: number;
+  title: string;
+  status: Status;
+  category: string;
+  icon: typeof Sparkles;
+  hue: number;
+  hue2: number;
+  motif: CoverMotif;
+  blurb: string;
+  description: string;
+  metrics?: { value: string; label: string }[];
+  tools: string[];
+  highlights: string[];
+  github?: string;
+  demo?: string;
+}
+
+const projects: Project[] = [
+  {
+    id: 1,
+    title: "Layoff Radar",
+    status: "live",
+    category: "MLOps · Fintech",
+    icon: TrendingDown,
+    hue: 14,
+    hue2: 36,
+    motif: "risk",
+    blurb: "A workforce-risk intelligence platform that predicts the likelihood of corporate layoffs before they're announced.",
+    description:
+      "An end-to-end platform that forecasts corporate layoff risk from financial performance, historical layoff events, and executive sentiment in earnings calls. A temporal labeling framework turns historical events into predictive training examples for early-warning detection.",
+    metrics: [
+      { value: "47K+", label: "financial records" },
+      { value: "2,300+", label: "layoff events" },
+      { value: "FinBERT", label: "sentiment NLP" },
+    ],
+    tools: ["XGBoost", "FinBERT", "FastAPI", "Docker", "MLflow", "SHAP", "Python"],
+    highlights: [
+      "Scalable ETL pipelines integrating 47K+ quarterly records from SimFin and 2,300+ layoff events",
+      "FinBERT pipeline extracting CEO/CFO earnings-call sentiment as predictive features",
+      "SMOTE, probability calibration, and business-driven evaluation metrics",
+      "SHAP explainability with FastAPI + Docker + MLflow in production",
+    ],
+    github: "https://github.com/Yashwanth-Kumar-Kotla/layoff-radar",
+    demo: "https://layoff-streamlit.onrender.com/",
+  },
+  {
+    id: 2,
+    title: "Retention ROI System",
+    status: "building",
+    category: "Causal ML · Decision Intelligence",
+    icon: Repeat,
+    hue: 158,
+    hue2: 188,
+    motif: "retention",
+    blurb: "A multi-layer retention engine quantifying churn risk, intervention lift, and the dollar value of acting.",
+    description:
+      "A decision-support system that fuses predictive modeling, causal inference, explainable AI, and LLM-driven narratives to estimate churn risk and the expected ROI of each retention intervention, so teams know not just who will churn, but who's worth saving.",
+    tools: ["Scikit-learn", "XGBoost", "LightGBM", "CausalML", "SHAP", "LLMs"],
+    highlights: [
+      "Uplift modeling to estimate treatment effects and find persuadable customer segments",
+      "Calibrated probabilities, class-imbalance handling, and business threshold optimization",
+      "SHAP + LLM narrative synthesis turns model output into human-readable retention plays",
+      "Containerized REST APIs and dashboards with monitoring, drift detection & experiment tracking",
+    ],
+  },
+  {
+    id: 3,
+    title: "Aura Dual Intelligence",
+    status: "live",
+    category: "Agentic AI · LLM",
+    icon: Sparkles,
+    hue: 258,
+    hue2: 288,
+    motif: "agents",
+    blurb: "Two frontier models that critique each other: GPT-4 and Gemini collaborating for sharper reasoning.",
+    description:
+      "A dual-intelligence engine where GPT-4 and Gemini work through a four-stage pipeline (independent responses, cross-evaluation, critique, and unified synthesis), yielding higher accuracy and fewer hallucinations than either model alone.",
+    tools: ["Next.js", "GPT-4 API", "Gemini API", "Multi-Agent AI", "Tailwind"],
+    highlights: [
+      "Four-stage pipeline: query → dual responses → cross-critique → unified answer",
+      "Two LLMs reviewing each other's work to reduce hallucination",
+      "Production-deployed with a live demo at auraduo.app",
+      "Model routing, response aggregation, and error handling at scale",
+    ],
+    github: "https://github.com/Yashwanth-Kumar-Kotla/aura-dual-intelligence",
+    demo: "https://www.auraduo.app/",
+  },
+  {
+    id: 4,
+    title: "Insurance Premium Predictor",
+    status: "live",
+    category: "Insurance ML",
+    icon: Shield,
+    hue: 212,
+    hue2: 238,
+    motif: "shield",
+    blurb: "An insurance risk classifier that predicts premium tiers from lifestyle and demographic signals.",
+    description:
+      "An end-to-end platform that classifies policyholders into premium risk tiers from demographic, lifestyle, and behavioral factors, automating traditional underwriting with real-time, validated predictions.",
+    tools: ["Scikit-learn", "FastAPI", "Streamlit", "Docker", "Pydantic"],
+    highlights: [
+      "Engineered features: BMI, age segmentation, lifestyle risk scoring, city-tier categorization",
+      "Real-time underwriting via FastAPI + Pydantic schema validation and health checks",
+      "Interactive Streamlit decision-support interface for instant predictions",
+      "Containerized and published to Docker Hub for reproducible deployment",
+    ],
+    github: "https://github.com/Yashwanth-Kumar-Kotla/Insurance_Premium_category_predictor",
+    demo: "https://insurance-cat.streamlit.app/",
+  },
+];
+
+const StatusBadge = ({ status }: { status: Status }) => {
+  if (status === "building") {
+    return (
+      <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider px-2 py-1 rounded-md bg-amber-400/10 border border-amber-400/25 text-amber-300">
+        <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse-dot" />
+        In progress
+      </span>
+    );
+  }
+  return (
+    <span className="inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider px-2 py-1 rounded-md bg-emerald-400/10 border border-emerald-400/25 text-emerald-300">
+      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+      Live
+    </span>
+  );
+};
+
+const DetailDialog = ({ project, trigger }: { project: Project; trigger: React.ReactNode }) => (
+  <Dialog>
+    <DialogTrigger asChild>{trigger}</DialogTrigger>
+    <DialogContent className="max-w-2xl max-h-[82vh] overflow-y-auto bg-zinc-950 border-white/[0.1]">
+      <ProjectCover icon={project.icon} hue={project.hue} hue2={project.hue2} motif={project.motif} large className="h-44 rounded-xl -mt-2" />
+      <DialogHeader>
+        <div className="flex items-center gap-3 flex-wrap">
+          <DialogTitle className="font-display text-2xl text-zinc-50">{project.title}</DialogTitle>
+          <StatusBadge status={project.status} />
+        </div>
+        <DialogDescription className="text-zinc-400 leading-relaxed pt-1">
+          {project.description}
+        </DialogDescription>
+      </DialogHeader>
+      <div className="space-y-6 mt-2">
+        <div>
+          <h4 className="font-mono text-xs uppercase tracking-wider text-zinc-500 mb-3">Highlights</h4>
+          <ul className="space-y-2.5">
+            {project.highlights.map((h) => (
+              <li key={h} className="flex items-start gap-3 text-sm text-zinc-300">
+                <span className="mt-1.5 w-1 h-1 rounded-full bg-primary flex-shrink-0" />
+                {h}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-mono text-xs uppercase tracking-wider text-zinc-500 mb-3">Built with</h4>
+          <div className="flex flex-wrap gap-2">
+            {project.tools.map((t) => (
+              <span key={t} className="font-mono text-[11px] px-2 py-1 rounded-md bg-white/[0.04] text-zinc-400 border border-white/[0.08]">
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+        {(project.github || project.demo) && (
+          <div className="flex gap-3 pt-1">
+            {project.github && (
+              <a href={project.github} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-white/[0.04] border border-white/[0.1] hover:border-white/25 text-zinc-200 transition-colors">
+                <Github className="h-4 w-4" /> View code
+              </a>
+            )}
+            {project.demo && (
+              <a href={project.demo} target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-primary hover:bg-primary/90 text-white transition-colors">
+                <ExternalLink className="h-4 w-4" /> Live demo
+              </a>
+            )}
+          </div>
+        )}
+      </div>
+    </DialogContent>
+  </Dialog>
+);
+
+const FeaturedProject = ({ project }: { project: Project }) => (
+  <div className="group grid lg:grid-cols-2 gap-px rounded-2xl overflow-hidden border border-white/[0.08] bg-white/[0.06] hover:border-white/[0.16] transition-colors">
+    <ProjectCover icon={project.icon} hue={project.hue} hue2={project.hue2} motif={project.motif} large className="min-h-[280px] lg:min-h-full" />
+    <div className="bg-zinc-950 p-8 flex flex-col">
+      <div className="flex items-center gap-3 mb-4">
+        <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">{project.category}</span>
+        <StatusBadge status={project.status} />
+      </div>
+      <h3 className="font-display text-2xl font-bold text-zinc-50 mb-3">{project.title}</h3>
+      <p className="text-zinc-400 leading-relaxed mb-6">{project.blurb}</p>
+
+      {project.metrics && (
+        <div className="grid grid-cols-3 gap-3 mb-7">
+          {project.metrics.map((m) => (
+            <div key={m.label} className="rounded-lg bg-white/[0.03] border border-white/[0.06] px-3 py-3">
+              <div className="font-display text-lg font-bold text-zinc-50 tabular-nums">{m.value}</div>
+              <div className="text-[11px] text-zinc-500 leading-tight mt-0.5">{m.label}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="flex flex-wrap gap-1.5 mb-7">
+        {project.tools.map((t) => (
+          <span key={t} className="font-mono text-[11px] px-2 py-1 rounded-md bg-white/[0.03] text-zinc-500 border border-white/[0.06]">
+            {t}
+          </span>
+        ))}
+      </div>
+
+      <div className="flex items-center gap-2 mt-auto">
+        <DetailDialog
+          project={project}
+          trigger={
+            <button className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-white/[0.04] border border-white/[0.1] hover:border-white/25 text-zinc-200 transition-colors">
+              Case study
+            </button>
+          }
+        />
+        {project.demo && (
+          <a href={project.demo} target="_blank" rel="noopener noreferrer"
+            className="group/btn inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-primary hover:bg-primary/90 text-white transition-colors">
+            Live demo
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+          </a>
+        )}
+        {project.github && (
+          <a href={project.github} target="_blank" rel="noopener noreferrer"
+            className="flex items-center justify-center w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.1] hover:border-white/25 text-zinc-300 transition-colors" aria-label="GitHub">
+            <Github className="h-4 w-4" />
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+);
+
+const ProjectCard = ({ project }: { project: Project }) => (
+  <div className="group flex flex-col rounded-2xl overflow-hidden border border-white/[0.08] bg-zinc-950 hover:border-white/[0.16] transition-colors">
+    <ProjectCover icon={project.icon} hue={project.hue} hue2={project.hue2} motif={project.motif} className="h-40" />
+    <div className="flex flex-col flex-1 p-6">
+      <div className="flex items-center gap-2.5 mb-3">
+        <span className="font-mono text-[10px] uppercase tracking-wider text-zinc-500">{project.category}</span>
+        <StatusBadge status={project.status} />
+      </div>
+      <h3 className="font-display text-lg font-bold text-zinc-50 mb-2 group-hover:text-primary transition-colors">
+        {project.title}
+      </h3>
+      <p className="text-sm text-zinc-500 leading-relaxed flex-1 mb-5">{project.blurb}</p>
+
+      <div className="flex flex-wrap gap-1.5 mb-5">
+        {project.tools.slice(0, 4).map((t) => (
+          <span key={t} className="font-mono text-[11px] px-2 py-0.5 rounded-md bg-white/[0.03] text-zinc-500 border border-white/[0.06]">
+            {t}
+          </span>
+        ))}
+        {project.tools.length > 4 && (
+          <span className="font-mono text-[11px] px-2 py-0.5 rounded-md bg-white/[0.03] text-zinc-600 border border-white/[0.06]">
+            +{project.tools.length - 4}
+          </span>
+        )}
+      </div>
+
+      <div className="flex items-center gap-2 mt-auto">
+        <DetailDialog
+          project={project}
+          trigger={
+            <button className="flex-1 py-2 text-sm font-medium rounded-lg bg-white/[0.04] border border-white/[0.1] hover:border-white/25 text-zinc-200 transition-colors">
+              Details
+            </button>
+          }
+        />
+        {project.github && (
+          <a href={project.github} target="_blank" rel="noopener noreferrer"
+            className="flex items-center justify-center w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.1] hover:border-white/25 text-zinc-300 transition-colors" aria-label="GitHub">
+            <Github className="h-4 w-4" />
+          </a>
+        )}
+        {project.demo && (
+          <a href={project.demo} target="_blank" rel="noopener noreferrer"
+            className="flex items-center justify-center w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.1] hover:border-white/25 text-zinc-300 transition-colors" aria-label="Live demo">
+            <ExternalLink className="h-4 w-4" />
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+);
 
 const Projects = () => {
-  const projects = [
-    {
-      id: 1,
-      title: "Aura Dual Intelligence",
-      shortDescription: "Multi-agent AI system combining GPT-4 and Gemini for enhanced reasoning and accuracy",
-      fullDescription: "Built a dual-intelligence collaboration engine where GPT-4 and Gemini work together through a four-stage pipeline: independent responses, cross-evaluation, critique, and unified synthesis. The result is higher accuracy and deeper reasoning than either model alone. Features a production-deployed Next.js frontend with real-time model interaction.",
-      tools: ["Next.js", "GPT-4 API", "Gemini API", "Tailwind CSS", "Multi-Agent AI"],
-      category: "AI / LLM",
-      icon: Sparkles,
-      highlights: [
-        "Four-stage pipeline: query → dual responses → cross-critique → unified answer",
-        "Two LLMs reviewing each other's work for higher accuracy",
-        "Production-deployed with live demo at auraduo.app",
-        "Modern responsive UI built with Next.js and Tailwind"
-      ],
-      image: "photo-1694903089438-bf28d4697d9a",
-      github: "https://github.com/Yashwanth-Kumar-Kotla/aura-dual-intelligence",
-      demo: "https://www.auraduo.app/"
-    },
-    {
-      id: 2,
-      title: "Next-Word Prediction with LSTM",
-      shortDescription: "Deep learning NLP model that predicts the next word in a sentence, trained on two corpora including Sherlock Holmes",
-      fullDescription: "Built a PyTorch LSTM language model trained on two distinct corpora: a custom 40-sentence dataset and the full Sherlock Holmes novel. The architecture uses an embedding layer (vocab → 100 dims) → LSTM (100 → 150 hidden units) → linear output layer. Supports autoregressive inference for multi-word text generation. Deployed as a live Streamlit web app.",
-      tools: ["Python", "PyTorch", "LSTM", "NLP", "Streamlit"],
-      category: "Deep Learning / NLP",
-      icon: Brain,
-      highlights: [
-        "96.36% accuracy on custom corpus, 86% on Sherlock Holmes novel",
-        "Autoregressive inference for multi-word text generation",
-        "Dual corpus training to test generalization across domains",
-        "Live demo deployed on Streamlit Cloud"
-      ],
-      image: "photo-1453090522900-026de5423c2a",
-      github: "https://github.com/Yashwanth-Kumar-Kotla/Next-Word-Prediction-Using-LSTM",
-      demo: "https://nextt-word-predictor.streamlit.app"
-    },
-    {
-      id: 3,
-      title: "Fashion-MNIST Image Classifier (ANN)",
-      shortDescription: "PyTorch neural network for clothing classification with batch normalization, dropout, and GPU acceleration",
-      fullDescription: "Built a multi-layer perceptron (784→128→64→10) in PyTorch to classify 10 clothing categories from the Fashion-MNIST dataset. Implements batch normalization, dropout regularization (p=0.3), ReLU activations, and Adam/SGD optimization. Includes custom Dataset and DataLoader classes, CUDA GPU support, and demonstrates modern deep learning best practices end-to-end.",
-      tools: ["Python", "PyTorch", "ANN", "GPU / CUDA", "Batch Normalization"],
-      category: "Deep Learning",
-      icon: Layers,
-      highlights: [
-        "MLP architecture with batch normalization and dropout regularization",
-        "GPU acceleration via CUDA for faster training",
-        "Custom Dataset and DataLoader classes for clean data pipelines",
-        "Demonstrates overfitting prevention with modern regularization"
-      ],
-      image: "photo-1445205170230-053b83016050",
-      github: "https://github.com/Yashwanth-Kumar-Kotla/Fashion-MNIST-using-ANN",
-      demo: "https://github.com/Yashwanth-Kumar-Kotla/Fashion-MNIST-using-ANN"
-    },
-    {
-      id: 4,
-      title: "Walmart Sales EDA",
-      shortDescription: "End-to-end business intelligence analysis on 10k Walmart transactions using Python and SQL",
-      fullDescription: "Comprehensive data analysis of a 10,000-row Walmart sales dataset. Built a full data pipeline using Kaggle API for ingestion, Python (Pandas, NumPy) for transformation, and both MySQL and PostgreSQL for structured querying. Solved real business intelligence questions around revenue trends, top-performing categories, peak hours, and customer behavior patterns.",
-      tools: ["Python", "Pandas", "MySQL", "PostgreSQL", "Kaggle API"],
-      category: "Business Analytics",
-      icon: ShoppingCart,
-      highlights: [
-        "Full pipeline from Kaggle API ingestion to SQL analysis",
-        "Dual-database querying with MySQL and PostgreSQL",
-        "Revenue trends, category performance, and customer segmentation",
-        "Structured problem-solving approach to business intelligence questions"
-      ],
-      image: "photo-1551288049-bebda4e38f71",
-      github: "https://github.com/Yashwanth-Kumar-Kotla/Walmart_Exploratory_Data_Analysis",
-      demo: "https://github.com/Yashwanth-Kumar-Kotla/Walmart_Exploratory_Data_Analysis"
-    },
-    {
-      id: 5,
-      title: "Diabetes Risk Predictor",
-      shortDescription: "Interactive SVM-based web app for real-time diabetes risk assessment from clinical health metrics",
-      fullDescription: "End-to-end ML project using a Support Vector Machine trained on 8 clinical health parameters (glucose, BMI, blood pressure, insulin, age, etc.) to predict diabetes risk. Deployed as an interactive Streamlit web application with real-time predictions. Covers the full pipeline from preprocessing and feature scaling to model evaluation and live deployment.",
-      tools: ["Python", "Scikit-learn", "SVM", "Streamlit", "Pandas"],
-      category: "Healthcare ML",
-      icon: Heart,
-      highlights: [
-        "SVM classifier on 8 key clinical biomarkers",
-        "Real-time prediction via live Streamlit web app",
-        "End-to-end pipeline: preprocessing → training → deployment",
-        "Interpretable results designed for healthcare decision support"
-      ],
-      image: "photo-1624454002429-40ed87a5ec04",
-      github: "https://github.com/Yashwanth-Kumar-Kotla/Streamlit-ML-using-Diabetes-Prediction-Model",
-      demo: "https://diabetespredictionusing.streamlit.app"
-    },
-    {
-      id: 6,
-      title: "Breast Cancer Detection using ML",
-      shortDescription: "Multi-algorithm classifier for early breast cancer detection, optimized for high recall",
-      fullDescription: "Built a classification system to detect malignant vs benign tumors from diagnostic features. Compared Logistic Regression, Random Forest, and SVM, selecting the best model based on recall — the critical metric in medical diagnosis where false negatives carry the highest cost. Includes feature importance analysis for clinical interpretability.",
-      tools: ["Python", "Scikit-learn", "Random Forest", "SVM", "NumPy"],
-      category: "Healthcare ML",
-      icon: BarChart3,
-      highlights: [
-        "Recall-optimized model selection for medical safety",
-        "Head-to-head comparison of Logistic Regression, Random Forest, and SVM",
-        "Feature importance analysis for clinical interpretability",
-        "Demonstrates understanding of evaluation metrics beyond accuracy"
-      ],
-      image: "photo-1518152006812-edab29b069ac",
-      github: "https://github.com/Yashwanth-Kumar-Kotla/Breast-cancer-detection-using-ML",
-      demo: "https://github.com/Yashwanth-Kumar-Kotla/Breast-cancer-detection-using-ML"
-    }
-  ];
+  const [featured, ...rest] = projects;
 
   return (
-    <section id="projects" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">Featured Projects</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-teal-600 mx-auto mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Machine Learning and AI projects showcasing end-to-end implementation
-          </p>
-        </div>
+    <section id="projects" className="py-28 border-t border-white/[0.06]">
+      <div className="max-w-5xl mx-auto px-6">
+        <Reveal>
+          <div className="mb-12">
+            <span className="font-mono text-xs text-primary tracking-[0.2em] uppercase">Work</span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-zinc-50 mt-2 tracking-tight">
+              Things I've built
+            </h2>
+            <p className="text-zinc-500 mt-3 max-w-lg">
+              End-to-end ML systems and AI products, built, deployed, and used.
+            </p>
+          </div>
+        </Reveal>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
-            <Card key={project.id} className="group hover:shadow-xl transition-all duration-300 overflow-hidden">
-              <div className="relative">
-                <img 
-                  src={`https://images.unsplash.com/${project.image}?auto=format&fit=crop&w=600&h=300`}
-                  alt={project.title}
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute top-4 left-4">
-                  <Badge variant="secondary" className="bg-white/90 text-gray-800">
-                    {project.category}
-                  </Badge>
-                </div>
+        <Reveal delay={60}>
+          <div className="mb-5">
+            <FeaturedProject project={featured} />
+          </div>
+        </Reveal>
+
+        <div className="grid md:grid-cols-3 gap-5">
+          {rest.map((p, i) => (
+            <Reveal key={p.id} delay={i * 80}>
+              <div className="h-full">
+                <ProjectCard project={p} />
               </div>
-              
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-start justify-between">
-                  <div className="flex items-center">
-                    <project.icon className="mr-3 h-5 w-5 text-blue-600" />
-                    <span className="text-lg">{project.title}</span>
-                  </div>
-                </CardTitle>
-                <CardDescription className="text-sm">
-                  {project.shortDescription}
-                </CardDescription>
-              </CardHeader>
-              
-              <CardContent>
-                <div className="mb-4">
-                  <div className="flex flex-wrap gap-1">
-                    {project.tools.slice(0, 4).map((tool, index) => (
-                      <Badge key={index} variant="outline" className="text-xs">
-                        {tool}
-                      </Badge>
-                    ))}
-                    {project.tools.length > 4 && (
-                      <Badge variant="outline" className="text-xs">
-                        +{project.tools.length - 4}
-                      </Badge>
-                    )}
-                  </div>
-                </div>
-                
-                <div className="flex gap-2">
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button variant="default" size="sm" className="flex-1">
-                        Details
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
-                      <DialogHeader>
-                        <DialogTitle className="flex items-center text-2xl">
-                          <project.icon className="mr-3 h-8 w-8 text-blue-600" />
-                          {project.title}
-                        </DialogTitle>
-                        <DialogDescription className="text-base">
-                          {project.fullDescription}
-                        </DialogDescription>
-                      </DialogHeader>
-                      
-                      <div className="space-y-6 mt-6">
-                        <img 
-                          src={`https://images.unsplash.com/${project.image}?auto=format&fit=crop&w=800&h=400`}
-                          alt={project.title}
-                          className="w-full h-64 object-cover rounded-lg"
-                        />
-                        
-                        <div>
-                          <h4 className="font-semibold text-lg mb-3">Key Highlights</h4>
-                          <ul className="space-y-2">
-                            {project.highlights.map((highlight, index) => (
-                              <li key={index} className="flex items-start">
-                                <div className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                                <span>{highlight}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                        
-                        <div>
-                          <h4 className="font-semibold text-lg mb-3">Technologies Used</h4>
-                          <div className="flex flex-wrap gap-2">
-                            {project.tools.map((tool, index) => (
-                              <Badge key={index} variant="secondary">
-                                {tool}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                        
-                        <div className="flex gap-3 pt-4">
-                          <Button asChild variant="default">
-                            <a href={project.github} target="_blank" rel="noopener noreferrer">
-                              <Github className="mr-2 h-4 w-4" />
-                              View Code
-                            </a>
-                          </Button>
-                          {project.demo !== project.github && (
-                            <Button asChild variant="outline">
-                              <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                                <ExternalLink className="mr-2 h-4 w-4" />
-                                Live Demo
-                              </a>
-                            </Button>
-                          )}
-                        </div>
-                      </div>
-                    </DialogContent>
-                  </Dialog>
-                  
-                  <Button asChild variant="outline" size="sm">
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                      <Github className="h-4 w-4" />
-                    </a>
-                  </Button>
-                  {project.demo !== project.github && (
-                    <Button asChild variant="outline" size="sm">
-                      <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="h-4 w-4" />
-                      </a>
-                    </Button>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
+            </Reveal>
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <p className="text-gray-600 mb-4">Want to see more projects?</p>
-          <Button asChild variant="outline" size="lg">
-            <a href="https://github.com/Yashwanth-Kumar-Kotla/" target="_blank" rel="noopener noreferrer">
-              <Github className="mr-2 h-5 w-5" />
-              View All on GitHub
+        <Reveal delay={80}>
+          <div className="mt-12 text-center">
+            <a href="https://github.com/Yashwanth-Kumar-Kotla/" target="_blank" rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-lg bg-white/[0.03] border border-white/[0.1] hover:border-white/25 text-zinc-300 transition-colors">
+              <Github className="h-4 w-4" />
+              More on GitHub
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
-          </Button>
-        </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

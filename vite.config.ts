@@ -19,4 +19,14 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      // Static, crawler-friendly pages for AutoShorts (Google OAuth / YouTube API audit).
+      input: {
+        main: path.resolve(__dirname, "index.html"),
+        autoshorts: path.resolve(__dirname, "autoshorts/index.html"),
+        autoshortsPrivacy: path.resolve(__dirname, "autoshorts/privacy/index.html"),
+      },
+    },
+  },
 }));

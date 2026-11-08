@@ -55,9 +55,14 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-white/[0.06] pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="font-mono text-xs text-zinc-600">
-            © {new Date().getFullYear()} Yashwanth Kumar Kotla
-          </p>
+          <div className="flex items-center gap-4">
+            <p className="font-mono text-xs text-zinc-600">
+              © {new Date().getFullYear()} Yashwanth Kumar Kotla
+            </p>
+            <a href="/autoshorts" className="text-xs text-zinc-600 hover:text-zinc-300 transition-colors">
+              AutoShorts
+            </a>
+          </div>
           <button onClick={scrollToTop} className="group inline-flex items-center gap-1.5 text-xs text-zinc-600 hover:text-zinc-300 transition-colors">
             Back to top
             <ArrowUp className="h-3 w-3 transition-transform group-hover:-translate-y-0.5" />

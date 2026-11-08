@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/autoshorts", "destination": "/autoshorts/index.html" },
+    { "source": "/autoshorts/privacy", "destination": "/autoshorts/privacy/index.html" }
+  ]
+}

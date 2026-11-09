@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0a0a0b" />
     <title>AutoShorts | Yashwanth Kumar Kotla</title>
-    <meta name="description" content="AutoShorts is a personal automation tool that creates YouTube Shorts and uploads them to its owner's own YouTube channels using the YouTube Data API and YouTube Analytics API." />
+    <meta name="description" content="AutoShorts is a personal automation tool that creates YouTube Shorts, uploads them to its owner's own YouTube channels, and posts one comment from the owner's channel on each of those videos, using the YouTube Data API and YouTube Analytics API." />
     <meta name="author" content="Yashwanth Kumar Kotla" />
     <link rel="canonical" href="https://yashwanthkkotla.vercel.app/autoshorts" />
 
     <meta property="og:title" content="AutoShorts" />
-    <meta property="og:description" content="A personal tool that creates YouTube Shorts and uploads them to the owner's own YouTube channels." />
+    <meta property="og:description" content="A personal tool that creates YouTube Shorts, uploads them to the owner's own YouTube channels, and posts one comment from the owner's channel on each video." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://yashwanthkkotla.vercel.app/autoshorts" />
 
@@ -31,11 +31,12 @@
     <main class="doc max-w-3xl mx-auto px-6 py-16">
       <p class="font-mono text-[11px] uppercase tracking-wider text-zinc-600 mb-4">Personal automation tool</p>
       <h1 class="font-display text-4xl md:text-5xl font-bold tracking-tight text-zinc-50 mb-6">AutoShorts</h1>
+      <p class="font-mono text-sm text-zinc-400 mb-6">AutoShorts uses YouTube API Services.</p>
 
       <p class="text-lg">
         AutoShorts is a personal automation tool built by Yashwanth Kumar Kotla. It creates short vertical videos
-        (YouTube Shorts) and uploads them to my own YouTube channels through the YouTube Data API v3, then reads
-        YouTube Analytics reports so I can see how those videos perform. It is not a public service. The only person
+        (YouTube Shorts), uploads them to my own YouTube channels through the YouTube Data API v3, posts one comment
+        from my own channel on each of those videos, then reads YouTube Analytics reports so I can see how those videos perform. It is not a public service. The only person
         who signs in with Google is me, the owner of the channels it publishes to.
       </p>
 
@@ -56,19 +57,25 @@
           metadata, such as titles and upload status, so it knows what has already been published.
         </li>
         <li>
+          <strong>Manage YouTube account, comments only</strong> (<code class="font-mono text-sm">youtube.force-ssl</code>): used only to post one
+          comment from my own channel on each of my own videos (<code class="font-mono text-sm">commentThreads.insert</code>). It is not used to
+          read, edit, or delete comments, or to act on anyone else's videos.
+        </li>
+        <li>
           <strong>View YouTube Analytics reports, read only</strong> (<code class="font-mono text-sm">yt-analytics.readonly</code>): to measure how my
           videos perform, such as views and watch time, so I can improve future videos.
         </li>
       </ul>
       <p>
-        This data is used only to publish to and measure my own channels. It is never sold, shared with third parties,
+        This data is used only to publish videos and comments to my own channels and to measure their performance. It is never sold, shared with third parties,
         or used for advertising.
       </p>
 
-      <h2>Privacy policy</h2>
+      <h2>Privacy policy and terms</h2>
       <p>
         Read the full <a href="/autoshorts/privacy">AutoShorts Privacy Policy</a> for details on how data is stored,
-        how long it is kept, and how to revoke access.
+        how long it is kept, and how to revoke access. Use of AutoShorts is covered by the
+        <a href="/autoshorts/terms">AutoShorts Terms of Service</a>.
       </p>
 
       <h2>Contact</h2>
@@ -80,7 +87,10 @@
     <footer class="border-t border-white/[0.06]">
       <div class="max-w-3xl mx-auto px-6 py-8 flex flex-col sm:flex-row justify-between gap-3">
         <p class="font-mono text-xs text-zinc-600">&copy; 2026 Yashwanth Kumar Kotla</p>
-        <a href="/autoshorts/privacy" class="text-xs text-zinc-500 hover:text-zinc-200 transition-colors">AutoShorts Privacy Policy</a>
+        <div class="flex gap-5">
+          <a href="/autoshorts/privacy" class="text-xs text-zinc-500 hover:text-zinc-200 transition-colors">Privacy Policy</a>
+          <a href="/autoshorts/terms" class="text-xs text-zinc-500 hover:text-zinc-200 transition-colors">Terms of Service</a>
+        </div>
       </div>
     </footer>
   </body>

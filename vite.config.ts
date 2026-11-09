@@ -26,6 +26,7 @@ export default defineConfig(({ mode }) => ({
         main: path.resolve(__dirname, "index.html"),
         autoshorts: path.resolve(__dirname, "autoshorts/index.html"),
         autoshortsPrivacy: path.resolve(__dirname, "autoshorts/privacy/index.html"),
+        autoshortsTerms: path.resolve(__dirname, "autoshorts/terms/index.html"),
       },
     },
   },
